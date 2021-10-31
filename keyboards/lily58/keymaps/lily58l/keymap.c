@@ -1,6 +1,7 @@
  /* Copyright 2017 F_YUUCHI
   * Copyright 2020 Drashna Jaelre <@drashna>
   * Copyright 2020 Ben Roesner (keycapsss.com)
+  * Copyright 2021 HellSingCoder
   *
   * This program is free software: you can redistribute it and/or modify
   * it under the terms of the GNU General Public License as published by
@@ -22,18 +23,41 @@
 extern uint8_t is_master;
 
 enum layers {
-    _QWERTY,
+//    _QWERTY,
+    _QWERTZ,
+    _COLEMAK,
+    _NEO,
+    _GAMING,
     _LOWER,
     _RAISE,
     _ADJUST,
+}; 
+
+// clang-format off
+enum custom_keycodes {
+//    KC_QWERTY,                  // change to QWERTY layer
+    KC_QWERTZ = SAFE_RANGE,     // change to QWERTZ layer
+    KC_COLEMAK,                 // change to COLEMAK layer
+    KC_NEO,                     // change to NEO layer
+    KC_GAMING,                  // change to GAMING layer
+    KC_LOWER,                   // change to LOWER layer
+    KC_RAISE,                   // change to RAISE layer
+    KC_ADJUST,                  // change to ADJUST layer
+    KC_PRVWD,                   // previous window
+    KC_NXTWD,                   // next window
+    KC_LSTRT,                   // home
+    KC_LEND,                    // end
+    KC_DLINE,                   // delete line
+    KC_BSPC_DEL,                // 
+    KC_LAYER,                   // 
 };
 
 #define RAISE MO(_RAISE)
 #define LOWER MO(_LOWER)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-
-/* QWERTY
+/*
+ * QWERTY
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * | ESC  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -43,16 +67,109 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
+ *                   | LAlt | LGUI |LOWER | /Enter  /       \Space \  |RAISE |BackSP| RGUI |
+ *                   |      |      |      |/       /         \      \ |      |      |      |
+ *                   `----------------------------'           '------''--------------------'
+ *
+ *
+ * [_QWERTY] = LAYOUT(
+ *  KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
+ *  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
+ *  KC_LCTRL, KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+ *  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
+ *                             KC_LALT, KC_LGUI,LOWER, KC_ENT,   KC_SPC,   RAISE,   KC_BSPC, KC_RGUI
+ *),
+ */
+/*
+ * QWERTZ
+ * ,-----------------------------------------.                    ,-----------------------------------------.
+ * | ESC  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `   |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  [   |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |LCTRL |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
+ * |------+------+------+------+------+------|   -   |    |    ]  |------+------+------+------+------+------|
+ * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
+ * `-----------------------------------------/       /     \      \-----------------------------------------'
+ *                   | LAlt | LGUI |LOWER | /Enter  /       \Space \  |RAISE |BackSP| RGUI |
+ *                   |      |      |      |/       /         \      \ |      |      |      |
+ *                   `----------------------------'           '------''--------------------'
+ */
+
+ [_QWERTZ] = LAYOUT(
+  KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
+  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
+  KC_LCTRL, KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MINS,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
+                             KC_LALT, KC_LGUI,LOWER, KC_ENT,   KC_SPC,   RAISE,   KC_BSPC, KC_RGUI
+),
+/*
+ * COLEMAK
+ * ,-----------------------------------------.                    ,-----------------------------------------.
+ * |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `   |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * | ESC  |   Q  |   W  |   F  |   P  |   G  |                    |   J  |   L  |   U  |   Y  |   ;  | Bspc |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * | TAB  |   A  |   R  |   S  |   T  |   D  |-------.    ,-------|   H  |   N  |   E  |   I  |   O  |  '   |
+ * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
+ * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   K  |   M  |   ,  |   .  |   /  |RShift|
+ * `-----------------------------------------/       /     \      \-----------------------------------------'
+ *                   | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt |       
+ *                   |      |      |      |/       /         \      \ |      |      |      |       
+ *                   '----------------------------'           '------''--------------------'       
+ */
+
+[_COLEMAK] = LAYOUT(
+  KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_GRV,
+  KC_ESC,   KC_Q,   KC_W,    KC_F,    KC_P,    KC_G,                      KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN,  KC_BSPC,
+  KC_TAB,   KC_A,   KC_R,    KC_S,    KC_T,    KC_D,                      KC_H,    KC_N,    KC_E,    KC_I,    KC_O,  KC_QUOT,
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,  KC_MUTE, XXXXXXX,   KC_K,    KC_M,    KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
+                             KC_LALT, KC_LCTRL,LOWER, KC_ENT,  KC_SPC,    RAISE,   KC_RCTRL,KC_RALT
+),
+/*
+ * NEO
+ * ,-----------------------------------------.                    ,-----------------------------------------.
+ * |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  =   |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * | ESC  |   X  |   V  |   L  |   C  |   W  |                    |   K  |   H  |   G  |   F  |   Q  | Bspc |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * | TAB  |   U  |   I  |   A  |   E  |   O  |-------.    ,-------|   S  |   N  |   R  |   T  |   D  |  Y   |
+ * |------+------+------+------+------+------|  MUTE |    |  -    |------+------+------+------+------+------|
+ * |LShift|   [  |   ;  |   '  |   P  |   Z  |-------|    |-------|   B  |   M  |   ,  |   .  |   J  |RShift|
+ * `-----------------------------------------/       /     \      \-----------------------------------------'
+ *                   | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt |       
+ *                   |      |      |      |/       /         \      \ |      |      |      |       
+ *                   '----------------------------'           '------''--------------------'       
+ */
+
+[_NEO] = LAYOUT(
+  KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_EQL,
+  KC_ESC,   KC_X,   KC_V,    KC_L,    KC_C,    KC_W,                      KC_K,    KC_H,    KC_G,    KC_F,    KC_Q,  KC_BSPC,
+  KC_TAB,   KC_U,   KC_I,    KC_A,    KC_E,    KC_O,                      KC_S,    KC_N,    KC_R,    KC_T,    KC_D,  KC_QUOT,
+  KC_LSFT,  KC_LBRC,KC_SCLN, KC_QUOT, KC_P,    KC_Z,  KC_MUTE, KC_MINS,   KC_B,    KC_M,    KC_COMM, KC_DOT, KC_SLSH,KC_RSFT,
+                             KC_LALT, KC_LCTRL,LOWER, KC_ENT,  KC_SPC,    RAISE,   KC_RCTRL,KC_RALT
+),
+/*
+ * QWERTZ
+ * ,-----------------------------------------.                    ,-----------------------------------------.
+ * | ESC  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `   |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  [   |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * |LCTRL |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
+ * |------+------+------+------+------+------|   -   |    |    ]  |------+------+------+------+------+------|
+ * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
+ * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
  *                   |      |      |      |/       /         \      \ |      |      |      |
  *                   `----------------------------'           '------''--------------------'
  */
 
- [_QWERTY] = LAYOUT(
+ [_QWERTZ] = LAYOUT(
   KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
-  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
+  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
   KC_LCTRL, KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MINS,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
                              KC_LALT, KC_LGUI,LOWER, KC_SPC,   KC_ENT,   RAISE,   KC_BSPC, KC_RGUI
 ),
 /* LOWER
@@ -99,25 +216,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              _______, _______, _______,  _______, _______,  _______, _______, _______
 ),
 /* ADJUST
- * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------.    ,-------|      |      |RGB ON| HUE+ | SAT+ | VAL+ |
- * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |      |      |      |      |      |      |-------|    |-------|      |      | MODE | HUE- | SAT- | VAL- |
- * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
- *                   |      |      |      |/       /         \      \ |      |      |      |
- *                   `----------------------------'           '------''--------------------'
+ * ,-----------------------------------------.                     ,-----------------------------------------.
+ * |      |      |      |      |       |      |                    | BL TG| BL + |RGB TG| HUE+ | SAT+ | VAL+ |
+ * |------+------+------+------+-------+------|                    |------+------+------+------+------+------|
+ * | RESET|      |QWERTZ|  NEO |COLEMAK|      |                    |BL MOD| BL - | MODE | HUE- | SAT- | VAL- |
+ * |------+------+------+------+-------+------|                    |------+------+------+------+------+------|
+ * |      |      |      |      |       |      |-------.    ,-------|      | MUTE | VOLDO| VOLUP|      |      |
+ * |------+------+------+------+-------+------|       |    |       |------+------+------+------+------+------|
+ * |      |      |      |      |       |      |-------|    |-------|      | PREV | PLAY | NEXT |      |      |
+ * `------------------------------------------/       /     \      \-----------------------------------------'
+ *                   | LAlt | LGUI |LOWER  | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
+ *                   |      |      |       |/       /         \      \ |      |      |      |
+ *                   `-----------------------------'           '------''--------------------'
  */
   [_ADJUST] = LAYOUT(
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI,
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD,
-                             _______, _______, _______, _______, _______,  _______, _______, _______
+  XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,    XXXXXXX,                   BL_TOGG, BL_INC,  RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI,
+  RESET,   XXXXXXX, KC_QWERTZ, KC_NEO,  KC_COLEMAK, XXXXXXX,                   BL_STEP, BL_DEC,  RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD,
+  XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,    XXXXXXX,                   XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX,
+  XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
+                               _______, _______,    _______, _______, _______, _______, _______, _______
   )
 };
 
@@ -129,168 +246,827 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 //SSD1306 OLED update loop, make sure to enable OLED_ENABLE=yes in rules.mk
 #ifdef OLED_ENABLE
 
-oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-    if (is_keyboard_master()) {
-        return OLED_ROTATION_270;
-    } else {
-        return OLED_ROTATION_0;
-    }
+/* 32 * 32 logo */
+static void render_logo(void) {
+    static const char PROGMEM hell_logo[] = {
+        0x00, 0x80, 0xc0, 0xc0, 
+        0x60, 0x60, 0x30, 0x30, 
+        0x18, 0x1c, 0x0c, 0x00, 
+        0x00, 0x00, 0x00, 0x80, 
+        0xe0, 0x78, 0x1e, 0x06, 
+        0x00, 0x0c, 0x1c, 0x18, 
+        0x30, 0x30, 0x60, 0x60, 
+        0xc0, 0xc0, 0x80, 0x00, 
+        0x01, 0x03, 0x07, 0x06, 
+        0x0c, 0x0c, 0x18, 0x18, 
+        0x30, 0x70, 0x60, 0x00, 
+        0xc0, 0xf0, 0x3c, 0x0f, 
+        0x03, 0x00, 0x00, 0x00, 
+        0x00, 0x60, 0x70, 0x30, 
+        0x18, 0x18, 0x0c, 0x0c, 
+        0x06, 0x07, 0x03, 0x01, 
+        0x00, 0xf8, 0xf8, 0x80, 
+        0x80, 0x80, 0xf8, 0xf8, 
+        0x00, 0x80, 0xc0, 0xc0, 
+        0x40, 0xc0, 0xc0, 0x80, 
+        0x00, 0xf8, 0xf8, 0x00, 
+        0xf8, 0xf8, 0x00, 0x08, 
+        0x38, 0x08, 0x00, 0x38, 
+        0x08, 0x30, 0x08, 0x38, 
+        0x00, 0x1f, 0x1f, 0x01, 
+        0x01, 0x01, 0x1f, 0x1f, 
+        0x00, 0x0f, 0x1f, 0x1a, 
+        0x12, 0x1a, 0x1b, 0x0b, 
+        0x00, 0x1f, 0x1f, 0x00, 
+        0x1f, 0x1f, 0x00, 0x00, 
+        0x00, 0x00, 0x00, 0x00, 
+        0x00, 0x00, 0x00, 0x00
+    };
+
+    oled_write_raw_P(hell_logo, sizeof(hell_logo));
 }
 
-void render_lily58_logo(void) {
-    static const char PROGMEM lily58_logo[] = {
-    // 'logo', 128x32px
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x40, 0xc0, 0x40, 0x40, 0xc0, 0x80, 0x80, 0x80, 0x00, 0x00,
-    0x80, 0xe0, 0x70, 0x3c, 0x0e, 0x06, 0x0e, 0x3c, 0x70, 0xe0, 0x80, 0x00, 0x00, 0xc0, 0xc0, 0x00,
-    0xc0, 0xc0, 0x00, 0xc0, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xc0, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xc0, 0x80, 0x00, 0x00, 0x00, 0x80,
-    0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x80, 0xc0, 0xc0, 0xc0, 0xc0, 0xc0, 0xc0, 0xc0, 0xc0, 0xc0, 0x80, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x80, 0x80, 0xc0, 0xc0, 0xc0, 0xc0, 0xc0, 0x80, 0x80, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0xc0, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3f, 0xfc, 0xc0, 0x80, 0x80, 0x80, 0x81, 0x83, 0x83,
-    0x07, 0x07, 0x0c, 0x18, 0x70, 0xe0, 0x80, 0x00, 0x00, 0x01, 0xff, 0xfc, 0x80, 0xb6, 0xb6, 0x80,
-    0xb0, 0xb0, 0x00, 0x36, 0x36, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xf0, 0xf1, 0x00, 0x00, 0x00, 0x00, 0xff,
-    0xff, 0x00, 0x00, 0x00, 0x30, 0xf0, 0xf0, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xf0, 0xf0,
-    0x30, 0x00, 0x00, 0x7f, 0xff, 0xff, 0xe1, 0x71, 0x71, 0xf1, 0xf1, 0xe1, 0xc1, 0x81, 0x00, 0x00,
-    0x00, 0x00, 0x0c, 0x3f, 0xff, 0xf3, 0xe1, 0xc1, 0xc1, 0x81, 0x81, 0xc3, 0xff, 0x7f, 0x1c, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x20, 0x70, 0x78, 0xdc, 0xcc, 0x86, 0x06, 0x03, 0x03, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
-    0x01, 0x03, 0x02, 0x06, 0x84, 0xe1, 0xfb, 0x38, 0x1c, 0x0c, 0x02, 0x01, 0x01, 0x01, 0x01, 0x01,
-    0x01, 0x01, 0x03, 0x03, 0x06, 0x86, 0xcc, 0xdc, 0x78, 0x70, 0x20, 0x00, 0xff, 0xff, 0x80, 0x80,
-    0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0xff,
-    0xff, 0x80, 0x00, 0x00, 0x00, 0x00, 0x03, 0x1f, 0x7e, 0xf8, 0xe0, 0xf0, 0x7e, 0x1f, 0x03, 0x00,
-    0x00, 0x00, 0x00, 0xe0, 0xe0, 0xc0, 0xc0, 0x80, 0x80, 0x80, 0xc0, 0xe1, 0xff, 0x7f, 0x3f, 0x00,
-    0x00, 0x00, 0x3e, 0xff, 0xff, 0xc1, 0xc0, 0x80, 0x81, 0x81, 0xc3, 0xc3, 0xff, 0xfe, 0x3c, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x80, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x03, 0x03, 0x06, 0x06, 0x06, 0x04, 0x04, 0x04, 0x04, 0x06,
-    0x06, 0x02, 0x03, 0x01, 0x01, 0x00, 0x01, 0x01, 0x03, 0x02, 0x06, 0x06, 0x04, 0x04, 0x04, 0x04,
-    0x06, 0x06, 0x06, 0x03, 0x03, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01,
-    0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00,
-    0x01, 0x01, 0x01, 0x00, 0x00, 0x60, 0x60, 0x70, 0x38, 0x1f, 0x0f, 0x03, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00
+/* 32 * 14 os logos */
+static const char PROGMEM windows_logo[] = {
+    0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0xbc, 
+    0xbc, 0xbe, 0xbe, 0x00, 
+    0xbe, 0xbe, 0xbf, 0xbf, 
+    0xbf, 0xbf, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x07, 
+    0x07, 0x0f, 0x0f, 0x00, 
+    0x0f, 0x0f, 0x1f, 0x1f, 
+    0x1f, 0x1f, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00
 };
-    oled_write_raw_P(lily58_logo, sizeof(lily58_logo));
-}
 
+static const char PROGMEM mac_logo[] = {
+    0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0xc0, 
+    0xf0, 0xf8, 0xf8, 0xf8, 
+    0xf0, 0xf6, 0xfb, 0xfb, 
+    0x38, 0x10, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x01, 
+    0x07, 0x0f, 0x1f, 0x1f, 
+    0x0f, 0x0f, 0x1f, 0x1f, 
+    0x0f, 0x06, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00
+};
 
-#    define KEYLOG_LEN 6
-char     keylog_str[KEYLOG_LEN] = {};
-uint8_t  keylogs_str_idx        = 0;
-uint16_t log_timer              = 0;
+/* Smart Backspace Delete */
 
-const char code_to_name[60] = {
-    ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
-    'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-    'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
-    'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\',
-    '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
+bool            shift_held = false;
+static uint16_t held_shift = 0;
 
-void add_keylog(uint16_t keycode) {
-    if ((keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) || (keycode >= QK_LAYER_TAP && keycode <= QK_LAYER_TAP_MAX)) {
-        keycode = keycode & 0xFF;
+/* KEYBOARD PET START */
+
+/* settings */
+#    define MIN_WALK_SPEED      10
+#    define MIN_RUN_SPEED       40
+
+/* advanced settings */
+#    define ANIM_FRAME_DURATION 200  // how long each frame lasts in ms
+#    define ANIM_SIZE           96   // number of bytes in array. If you change sprites, minimize for adequate firmware size. max is 1024
+
+/* timers */
+uint32_t anim_timer = 0;
+uint32_t anim_sleep = 0;
+
+/* current frame */
+uint8_t current_frame = 0;
+
+/* status variables */
+int   current_wpm = 0;
+led_t led_usb_state;
+
+bool isSneaking = false;
+bool isJumping  = false;
+bool showedJump = true;
+
+/* logic */
+static void render_luna(int LUNA_X, int LUNA_Y) {
+    /* Sit */
+    static const char PROGMEM sit[2][ANIM_SIZE] = 
+    {/* 'sit1', 32x22px */
+       {
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x00, 0xe0, 0x1c, 
+           0x02, 0x05, 0x02, 0x24, 
+           0x04, 0x04, 0x02, 0xa9, 
+           0x1e, 0xe0, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x00, 0xe0, 0x10, 
+           0x08, 0x68, 0x10, 0x08, 
+           0x04, 0x03, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x02, 0x06, 0x82, 
+           0x7c, 0x03, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x00, 0x01, 0x02, 
+           0x04, 0x0c, 0x10, 0x10, 
+           0x20, 0x20, 0x20, 0x28, 
+           0x3e, 0x1c, 0x20, 0x20, 
+           0x3e, 0x0f, 0x11, 0x1f, 
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00,
+       },
+
+       /* 'sit2', 32x22px */
+       {
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x00, 0xe0, 0x1c, 
+           0x02, 0x05, 0x02, 0x24, 
+           0x04, 0x04, 0x02, 0xa9, 
+           0x1e, 0xe0, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0xe0, 0x90, 0x08, 
+           0x18, 0x60, 0x10, 0x08, 
+           0x04, 0x03, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x02, 0x0e, 0x82, 
+           0x7c, 0x03, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x00, 0x01, 0x02, 
+           0x04, 0x0c, 0x10, 0x10, 
+           0x20, 0x20, 0x20, 0x28, 
+           0x3e, 0x1c, 0x20, 0x20, 
+           0x3e, 0x0f, 0x11, 0x1f, 
+           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00
+        }
+    };
+
+    /* Walk */
+    static const char PROGMEM walk[2][ANIM_SIZE] = 
+    {/* 'walk1', 32x22px */
+        {
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x80, 0x40, 0x20, 
+            0x10, 0x90, 0x90, 0x90, 
+            0xa0, 0xc0, 0x80, 0x80, 
+            0x80, 0x70, 0x08, 0x14, 
+            0x08, 0x90, 0x10, 0x10, 
+            0x08, 0xa4, 0x78, 0x80, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x07, 0x08, 0xfc, 
+            0x01, 0x00, 0x00, 0x00, 
+            0x00, 0x80, 0x00, 0x00, 
+            0x01, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x08, 
+            0x18, 0xea, 0x10, 0x0f, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x03, 
+            0x1c, 0x20, 0x20, 0x3c, 
+            0x0f, 0x11, 0x1f, 0x03, 
+            0x06, 0x18, 0x20, 0x20, 
+            0x3c, 0x0c, 0x12, 0x1e, 
+            0x01, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00
+        },
+
+        /* 'walk2', 32x22px */
+        {
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x80, 0x40, 
+            0x20, 0x20, 0x20, 0x40, 
+            0x80, 0x00, 0x00, 0x00, 
+            0x00, 0xe0, 0x10, 0x28, 
+            0x10, 0x20, 0x20, 0x20, 
+            0x10, 0x48, 0xf0, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x1f, 0x20, 0xf8, 
+            0x02, 0x01, 0x01, 0x01, 
+            0x01, 0x01, 0x01, 0x01, 
+            0x03, 0x00, 0x00, 0x00, 
+            0x00, 0x01, 0x00, 0x10, 
+            0x30, 0xd5, 0x20, 0x1f, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x3f, 
+            0x20, 0x30, 0x0c, 0x02, 
+            0x05, 0x09, 0x12, 0x1e, 
+            0x02, 0x1c, 0x14, 0x08, 
+            0x10, 0x20, 0x2c, 0x32, 
+            0x01, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00
+        }
+    };
+
+    /* Run */
+    static const char PROGMEM run[2][ANIM_SIZE] = 
+    {/* 'run1', 32x22px */
+        {
+            0x00, 0x00, 0x00, 0x00, 
+            0xe0, 0x10, 0x08, 0x08, 
+            0xc8, 0xb0, 0x80, 0x80, 
+            0x80, 0x80, 0x80, 0x80, 
+            0x80, 0x40, 0x40, 0x3c, 
+            0x14, 0x04, 0x08, 0x90, 
+            0x18, 0x04, 0x08, 0xb0, 
+            0x40, 0x80, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x01, 0x02, 0xc4, 0xa4, 
+            0xfc, 0x00, 0x00, 0x00, 
+            0x00, 0x80, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x80, 
+            0xc8, 0x58, 0x28, 0x2a, 
+            0x10, 0x0f, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x0e, 0x09, 0x04, 
+            0x04, 0x04, 0x04, 0x02, 
+            0x03, 0x02, 0x01, 0x01, 
+            0x02, 0x02, 0x04, 0x08, 
+            0x10, 0x26, 0x2b, 0x32, 
+            0x04, 0x05, 0x06, 0x00, 
+            0x00, 0x00, 0x00, 0x00
+        },
+
+        /* 'run2', 32x22px */
+        {
+            0x00, 0x00, 0x00, 0xe0, 
+            0x10, 0x10, 0xf0, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x80, 
+            0x80, 0x80, 0x78, 0x28, 
+            0x08, 0x10, 0x20, 0x30, 
+            0x08, 0x10, 0x20, 0x40, 
+            0x80, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x03, 
+            0x04, 0x08, 0x10, 0x11, 
+            0xf9, 0x01, 0x01, 0x01, 
+            0x01, 0x01, 0x01, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x01, 
+            0x10, 0xb0, 0x50, 0x55, 
+            0x20, 0x1f, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x01, 0x02, 0x0c, 
+            0x10, 0x20, 0x28, 0x37, 
+            0x02, 0x1e, 0x20, 0x20, 
+            0x18, 0x0c, 0x14, 0x1e, 
+            0x01, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00
+        }
+    };
+
+    /* Bark */
+    static const char PROGMEM bark[2][ANIM_SIZE] = 
+    {/* 'bark1', 32x22px */
+        {
+            0x00, 0xc0, 0x20, 0x10, 
+            0xd0, 0x30, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x80, 0x80, 0x40, 
+            0x3c, 0x14, 0x04, 0x08, 
+            0x90, 0x18, 0x04, 0x08, 
+            0xb0, 0x40, 0x80, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x03, 0x04, 0x08, 
+            0x10, 0x11, 0xf9, 0x01, 
+            0x01, 0x01, 0x01, 0x01, 
+            0x01, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x80, 0xc8, 0x48, 0x28, 
+            0x2a, 0x10, 0x0f, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x01, 
+            0x02, 0x0c, 0x10, 0x20, 
+            0x28, 0x37, 0x02, 0x02, 
+            0x04, 0x08, 0x10, 0x26, 
+            0x2b, 0x32, 0x04, 0x05, 
+            0x06, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00
+        },
+
+        /* 'bark2', 32x22px */
+        {
+            0x00, 0xe0, 0x10, 0x10, 
+            0xf0, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x80, 0x80, 0x40, 
+            0x40, 0x2c, 0x14, 0x04, 
+            0x08, 0x90, 0x18, 0x04, 
+            0x08, 0xb0, 0x40, 0x80, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x03, 0x04, 0x08, 
+            0x10, 0x11, 0xf9, 0x01, 
+            0x01, 0x01, 0x01, 0x01, 
+            0x01, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x80, 0xc0, 0x48, 
+            0x28, 0x2a, 0x10, 0x0f, 
+            0x20, 0x4a, 0x09, 0x10, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x01, 
+            0x02, 0x0c, 0x10, 0x20, 
+            0x28, 0x37, 0x02, 0x02, 
+            0x04, 0x08, 0x10, 0x26, 
+            0x2b, 0x32, 0x04, 0x05, 
+            0x06, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00
+        }};
+
+    /* Sneak */
+    static const char PROGMEM sneak[2][ANIM_SIZE] = 
+    {/* 'sneak1', 32x22px */
+        {
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x80, 0x40, 
+            0x40, 0x40, 0x40, 0x80, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0xc0, 0x40, 
+            0x40, 0x80, 0x00, 0x80, 
+            0x40, 0x80, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x1e, 0x21, 0xf0, 0x04, 
+            0x02, 0x02, 0x02, 0x02, 
+            0x03, 0x02, 0x02, 0x04, 
+            0x04, 0x04, 0x03, 0x01, 
+            0x00, 0x00, 0x09, 0x01, 
+            0x80, 0x80, 0xab, 0x04, 
+            0xf8, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x03, 0x1c, 
+            0x20, 0x20, 0x3c, 0x0f, 
+            0x11, 0x1f, 0x02, 0x06, 
+            0x18, 0x20, 0x20, 0x38, 
+            0x08, 0x10, 0x18, 0x04, 
+            0x04, 0x02, 0x02, 0x01, 
+            0x00, 0x00, 0x00, 0x00
+        },
+
+        /* 'sneak2', 32x22px */
+        {
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x80, 0x40, 
+            0x40, 0x40, 0x80, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0xe0, 0xa0, 
+            0x20, 0x40, 0x80, 0xc0, 
+            0x20, 0x40, 0x80, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x3e, 0x41, 0xf0, 0x04, 
+            0x02, 0x02, 0x02, 0x03, 
+            0x02, 0x02, 0x02, 0x04, 
+            0x04, 0x02, 0x01, 0x00, 
+            0x00, 0x00, 0x04, 0x00, 
+            0x40, 0x40, 0x55, 0x82, 
+            0x7c, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x3f, 0x20, 
+            0x30, 0x0c, 0x02, 0x05, 
+            0x09, 0x12, 0x1e, 0x04, 
+            0x18, 0x10, 0x08, 0x10, 
+            0x20, 0x28, 0x34, 0x06, 
+            0x02, 0x01, 0x01, 0x00, 
+            0x00, 0x00, 0x00, 0x00
+        }};
+
+    /* animation */
+    void animate_luna(void) {
+        /* jump */
+        if (isJumping || !showedJump) {
+            /* clear */
+            oled_set_cursor(LUNA_X, LUNA_Y + 2);
+            oled_write("     ", false);
+
+            oled_set_cursor(LUNA_X, LUNA_Y - 1);
+
+            showedJump = true;
+        } else {
+            /* clear */
+            oled_set_cursor(LUNA_X, LUNA_Y - 1);
+            oled_write("     ", false);
+
+            oled_set_cursor(LUNA_X, LUNA_Y);
+        }
+
+        /* switch frame */
+        current_frame = (current_frame + 1) % 2;
+
+        /* current status */
+        if (led_usb_state.caps_lock) {
+            oled_write_raw_P(bark[abs(1 - current_frame)], ANIM_SIZE);
+
+        } else if (isSneaking) {
+            oled_write_raw_P(sneak[abs(1 - current_frame)], ANIM_SIZE);
+
+        } else if (current_wpm <= MIN_WALK_SPEED) {
+            oled_write_raw_P(sit[abs(1 - current_frame)], ANIM_SIZE);
+
+        } else if (current_wpm <= MIN_RUN_SPEED) {
+            oled_write_raw_P(walk[abs(1 - current_frame)], ANIM_SIZE);
+
+        } else {
+            oled_write_raw_P(run[abs(1 - current_frame)], ANIM_SIZE);
+        }
     }
 
-    for (uint8_t i = KEYLOG_LEN - 1; i > 0; i--) {
-        keylog_str[i] = keylog_str[i - 1];
+    /* animation timer */
+    if (timer_elapsed32(anim_timer) > ANIM_FRAME_DURATION) {
+        anim_timer = timer_read32();
+        animate_luna();
     }
-    if (keycode < 60) {
-        keylog_str[0] = code_to_name[keycode];
-    }
-    keylog_str[KEYLOG_LEN - 1] = 0;
 
-    log_timer = timer_read();
-}
-
-void update_log(void) {
-    if (timer_elapsed(log_timer) > 750) {
-        add_keylog(0);
+    /* this fixes the screen on and off bug */
+    if (current_wpm > 0) {
+        oled_on();
+        anim_sleep = timer_read32();
+    } else if (timer_elapsed32(anim_sleep) > OLED_TIMEOUT) {
+        oled_off();
     }
 }
 
-void render_keylogger_status(void) {
-    oled_write_P(PSTR("KLogr"), false);
-    oled_write(keylog_str, false);
+/* KEYBOARD PET END */
+
+static void print_logo_narrow(void) {
+    render_logo();
+
+    /* wpm counter */
+    uint8_t n = get_current_wpm();
+    char    wpm_str[4];
+    oled_set_cursor(0, 14);
+    wpm_str[3] = '\0';
+    wpm_str[2] = '0' + n % 10;
+    wpm_str[1] = '0' + (n /= 10) % 10;
+    wpm_str[0] = '0' + n / 10;
+    oled_write(wpm_str, false);
+
+    oled_set_cursor(0, 15);
+    oled_write(" wpm", false);
 }
 
-void render_default_layer_state(void) {
-    oled_write_P(PSTR("Layer"), false);
-    oled_write_P(PSTR(" "), false);
-    switch (get_highest_layer(layer_state)) {
-        case _QWERTY:
-            oled_write_P(PSTR("QRTY"), false);
+static void print_status_narrow(void) {
+    /* Print current mode */
+    oled_set_cursor(0, 0);
+    if (keymap_config.swap_lctl_lgui) {
+        oled_write_raw_P(mac_logo, sizeof(mac_logo));
+    } else {
+        oled_write_raw_P(windows_logo, sizeof(windows_logo));
+    }
+
+    oled_set_cursor(0, 3);
+
+    switch (get_highest_layer(default_layer_state)) {
+        // case _QWERTY:
+            // oled_write("QWRTY", false);
+            // break;
+        case _QWERTZ:
+            oled_write("QWRTZ", false);
             break;
-        case _LOWER:
-            oled_write_ln_P(PSTR("LOW"), false);
+        case _COLEMAK:
+            oled_write("CLMAK", false);
             break;
-        case _RAISE:
-            oled_write_P(PSTR("HIGH"), false);
+        case _NEO:
+            oled_write("NEO  ", false);
             break;
-        case _ADJUST:
-            oled_write_ln_P(PSTR("ADJ"), false);
+        case _GAMING:
+            oled_write("GAMES", false);
             break;
         default:
-            oled_write_ln_P(PSTR("Undefined"), false);
+            oled_write("UNDEF", false);
+    }
+
+    oled_set_cursor(0, 5);
+
+    /* Print current layer */
+    oled_write("LAYER", false);
+
+    oled_set_cursor(0, 6);
+
+    switch (get_highest_layer(layer_state)) {
+        // case _QWERTY:
+            // oled_write("QWRTY", false);
+            // break;
+        case _QWERTZ:
+            oled_write("QWRTZ", false);
+            break;
+        case _COLEMAK:
+            oled_write("Clmak ", false);
+            break;
+        case _NEO:
+            oled_write("Neo  ", false);
+            break;
+        case _GAMING:
+            oled_write("Games", false);
+            break;
+        case _RAISE:
+            oled_write("Raise", false);
+            break;
+        case _LOWER:
+            oled_write("Lower", false);
+            break;
+        case _ADJUST:
+            oled_write("Adj  ", false);
+            break;
+        default:
+            oled_write("Undef", false);
+    }
+
+    /* caps lock */
+    oled_set_cursor(0, 8);
+    oled_write("CPSLK", led_usb_state.caps_lock);
+
+    /* KEYBOARD PET RENDER START */
+
+    render_luna(0, 13);
+
+    /* KEYBOARD PET RENDER END */
+}
+
+oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_270; }
+
+void oled_task_user(void) {
+    /* KEYBOARD PET VARIABLES START */
+
+    current_wpm   = get_current_wpm();
+    led_usb_state = host_keyboard_led_state();
+
+    /* KEYBOARD PET VARIABLES END */
+
+    if (is_keyboard_master()) {
+        print_status_narrow();
+    } else {
+        print_logo_narrow();
     }
 }
 
-void render_keylock_status(led_t led_state) {
-    oled_write_ln_P(PSTR("Lock"), false);
-    oled_write_P(PSTR(" "), false);
-    oled_write_P(PSTR("N"), led_state.num_lock);
-    oled_write_P(PSTR("C"), led_state.caps_lock);
-    oled_write_ln_P(PSTR("S"), led_state.scroll_lock);
-}
-
-void render_mod_status(uint8_t modifiers) {
-    oled_write_ln_P(PSTR("Mods"), false);
-    oled_write_P(PSTR(" "), false);
-    oled_write_P(PSTR("S"), (modifiers & MOD_MASK_SHIFT));
-    oled_write_P(PSTR("C"), (modifiers & MOD_MASK_CTRL));
-    oled_write_P(PSTR("A"), (modifiers & MOD_MASK_ALT));
-    oled_write_P(PSTR("G"), (modifiers & MOD_MASK_GUI));
-}
-
-void render_status_main(void) {
-    // Show keyboard layout
-    render_default_layer_state();
-    // Add a empty line
-    oled_write_P(PSTR("-----"), false);
-    // Show host keyboard led status
-    render_keylock_status(host_keyboard_led_state());
-    // Add a empty line
-    oled_write_P(PSTR("-----"), false);
-    // Show modifier status
-    render_mod_status(get_mods());
-    // Add a empty line
-    oled_write_P(PSTR("-----"), false);
-    render_keylogger_status();
-}
-
-void oled_task_user(void) {
-  update_log();
-  if (is_keyboard_master()) {
-    render_status_main();  // Renders the current keyboard state (layer, lock, caps, scroll, etc)
-  } else {
-    render_lily58_logo();
-  }
-}
+#endif // OLED_ENABLE
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-        add_keylog(keycode);
+    switch (keycode) {
+        // case KC_QWERTY:
+            // if (record->event.pressed) {
+                // set_single_persistent_default_layer(_QWERTY);
+            // }
+            // return false;
+        case KC_QWERTZ:
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(_QWERTZ);
+            }
+            return false;
+        case KC_COLEMAK:
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(_COLEMAK);
+            }
+            return false;
+        case KC_NEO:
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(_NEO);
+            }
+            return false;
+        case KC_GAMING:
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(_GAMING);
+            }
+            return false;
+        case KC_LOWER:
+            if (record->event.pressed) {
+                layer_on(_LOWER);
+                update_tri_layer(_LOWER, _RAISE, _ADJUST);
+            } else {
+                layer_off(_LOWER);
+                update_tri_layer(_LOWER, _RAISE, _ADJUST);
+            }
+            return false;
+        case KC_RAISE:
+            if (record->event.pressed) {
+                layer_on(_RAISE);
+                update_tri_layer(_LOWER, _RAISE, _ADJUST);
+            } else {
+                layer_off(_RAISE);
+                update_tri_layer(_LOWER, _RAISE, _ADJUST);
+            }
+            return false;
+        case KC_ADJUST:
+            if (record->event.pressed) {
+                layer_on(_ADJUST);
+            } else {
+                layer_off(_ADJUST);
+            }
+            return false;
+        case KC_PRVWD:
+            if (record->event.pressed) {
+                if (keymap_config.swap_lctl_lgui) {
+                    register_mods(mod_config(MOD_LALT));
+                    register_code(KC_LEFT);
+                } else {
+                    register_mods(mod_config(MOD_LCTL));
+                    register_code(KC_LEFT);
+                }
+            } else {
+                if (keymap_config.swap_lctl_lgui) {
+                    unregister_mods(mod_config(MOD_LALT));
+                    unregister_code(KC_LEFT);
+                } else {
+                    unregister_mods(mod_config(MOD_LCTL));
+                    unregister_code(KC_LEFT);
+                }
+            }
+            break;
+        case KC_NXTWD:
+            if (record->event.pressed) {
+                if (keymap_config.swap_lctl_lgui) {
+                    register_mods(mod_config(MOD_LALT));
+                    register_code(KC_RIGHT);
+                } else {
+                    register_mods(mod_config(MOD_LCTL));
+                    register_code(KC_RIGHT);
+                }
+            } else {
+                if (keymap_config.swap_lctl_lgui) {
+                    unregister_mods(mod_config(MOD_LALT));
+                    unregister_code(KC_RIGHT);
+                } else {
+                    unregister_mods(mod_config(MOD_LCTL));
+                    unregister_code(KC_RIGHT);
+                }
+            }
+            break;
+        case KC_LSTRT:
+            if (record->event.pressed) {
+                if (keymap_config.swap_lctl_lgui) {
+                    /* CMD-arrow on Mac, but we have CTL and GUI swapped */
+                    register_mods(mod_config(MOD_LCTL));
+                    register_code(KC_LEFT);
+                } else {
+                    register_code(KC_HOME);
+                }
+            } else {
+                if (keymap_config.swap_lctl_lgui) {
+                    unregister_mods(mod_config(MOD_LCTL));
+                    unregister_code(KC_LEFT);
+                } else {
+                    unregister_code(KC_HOME);
+                }
+            }
+            break;
+        case KC_LEND:
+            if (record->event.pressed) {
+                if (keymap_config.swap_lctl_lgui) {
+                    /* CMD-arrow on Mac, but we have CTL and GUI swapped */
+                    register_mods(mod_config(MOD_LCTL));
+                    register_code(KC_RIGHT);
+                } else {
+                    register_code(KC_END);
+                }
+            } else {
+                if (keymap_config.swap_lctl_lgui) {
+                    unregister_mods(mod_config(MOD_LCTL));
+                    unregister_code(KC_RIGHT);
+                } else {
+                    unregister_code(KC_END);
+                }
+            }
+            break;
+        case KC_DLINE:
+            if (record->event.pressed) {
+                register_mods(mod_config(MOD_LCTL));
+                register_code(KC_BSPC);
+            } else {
+                unregister_mods(mod_config(MOD_LCTL));
+                unregister_code(KC_BSPC);
+            }
+            break;
+        case KC_COPY:
+            if (record->event.pressed) {
+                register_mods(mod_config(MOD_LCTL));
+                register_code(KC_C);
+            } else {
+                unregister_mods(mod_config(MOD_LCTL));
+                unregister_code(KC_C);
+            }
+            return false;
+        case KC_PASTE:
+            if (record->event.pressed) {
+                register_mods(mod_config(MOD_LCTL));
+                register_code(KC_V);
+            } else {
+                unregister_mods(mod_config(MOD_LCTL));
+                unregister_code(KC_V);
+            }
+            return false;
+        case KC_CUT:
+            if (record->event.pressed) {
+                register_mods(mod_config(MOD_LCTL));
+                register_code(KC_X);
+            } else {
+                unregister_mods(mod_config(MOD_LCTL));
+                unregister_code(KC_X);
+            }
+            return false;
+            break;
+        case KC_UNDO:
+            if (record->event.pressed) {
+                register_mods(mod_config(MOD_LCTL));
+                register_code(KC_Z);
+            } else {
+                unregister_mods(mod_config(MOD_LCTL));
+                unregister_code(KC_Z);
+            }
+            return false;
+
+        /* Smart Backspace Delete */
+
+        case KC_RSFT:
+        case KC_LSFT:
+            shift_held = record->event.pressed;
+            held_shift = keycode;
+            break;
+        case KC_BSPC_DEL:
+            if (record->event.pressed) {
+                if (shift_held) {
+                    unregister_code(held_shift);
+                    register_code(KC_DEL);
+                } else {
+                    register_code(KC_BSPC);
+                }
+            } else {
+                unregister_code(KC_DEL);
+                unregister_code(KC_BSPC);
+                if (shift_held) {
+                    register_code(held_shift);
+                }
+            }
+            return false;
+
+            /* LAYER */
+
+        case KC_LAYER:
+            if (record->event.pressed) {
+                if (shift_held) {
+                    if (record->event.pressed) {
+                        if (get_highest_layer(default_layer_state) == _QWERTZ) {
+                            set_single_persistent_default_layer(_GAMING);
+                        } else if (get_highest_layer(default_layer_state) == _GAMING) {
+                            set_single_persistent_default_layer(_QWERTZ);
+                        }
+                    }
+                } else {
+                    layer_on(_LOWER);
+                    update_tri_layer(_LOWER, _RAISE, _ADJUST);
+                }
+            } else {
+                layer_off(_LOWER);
+                update_tri_layer(_LOWER, _RAISE, _ADJUST);
+            }
+            return false;
+
+            /* KEYBOARD PET STATUS START */
+
+        case KC_LCTL:
+        case KC_RCTL:
+            if (record->event.pressed) {
+                isSneaking = true;
+            } else {
+                isSneaking = false;
+            }
+            break;
+        case KC_SPC:
+            if (record->event.pressed) {
+                isJumping  = true;
+                showedJump = false;
+            } else {
+                isJumping = false;
+            }
+            break;
+
+            /* KEYBOARD PET STATUS END */
     }
     return true;
 }
-#endif // OLED_ENABLE
-
 
 // Rotary encoder related code
 #ifdef ENCODER_ENABLE
+
 bool encoder_update_user(uint8_t index, bool clockwise) {
   if (index == 0) { // Encoder on master side
     if(IS_LAYER_ON(_RAISE)) { // on Raise layer
@@ -328,4 +1104,4 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
   }
     return true;
 }
-#endif
+#endif // ENCODER_ENABLE
