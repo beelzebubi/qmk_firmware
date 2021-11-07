@@ -31,7 +31,7 @@ enum layers {
     _LOWER,
     _RAISE,
     _ADJUST,
-}; 
+};
 
 // clang-format off
 enum custom_keycodes {
@@ -48,8 +48,12 @@ enum custom_keycodes {
     KC_LSTRT,                   // home
     KC_LEND,                    // end
     KC_DLINE,                   // delete line
-    // KC_BSPC_DEL,                // 
-    KC_LAYER,                   // 
+    // KC_BSPC_DEL,                //
+    KC_LAYER,                   //
+};
+
+enum {
+    TD_LSFT_CAPS
 };
 
 #define RAISE MO(_RAISE)
@@ -67,9 +71,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Enter  /       \Space \  |RAISE |BackSP| RGUI |
- *                   |      |      |      |/       /         \      \ |      |      |      |
- *                   `----------------------------'           '------''--------------------'
+ *                   | LAlt | LGUI |LOWER | /Enter  /       \Space \ |RAISE |BackSP| RGUI |
+ *                   |      |      |      |/       /         \      \|      |      |      |
+ *                   `--------------------'-------'           '------'--------------------'
  *
  *
  * [_QWERTY] = LAYOUT(
@@ -77,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_MINS,
  *  KC_LCTRL, KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
  *  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_LBRC,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
- *                             KC_LALT, KC_LGUI,LOWER, KC_ENT,   KC_SPC,   RAISE,   KC_BSPC, KC_RGUI
+ *                             KC_LALT, KC_LGUI, LOWER,KC_ENT,   KC_SPC,   RAISE,   KC_BSPC, KC_RGUI
  *),
  */
 /*
@@ -91,17 +95,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|   -   |    |    ]  |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Enter  /       \Space \  |RAISE |BackSP| RGUI |
- *                   |      |      |      |/       /         \      \ |      |      |      |
- *                   `----------------------------'           '------''--------------------'
+ *                   | LAlt | LGUI |LOWER | /Enter  /       \Space \ |RAISE |BackSP| RGUI |
+ *                   |      |      |      |/       /         \      \|      |      |      |
+ *                   `--------------------'-------'           '------'--------------------'
  */
 
  [_QWERTZ] = LAYOUT(
-  KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
-  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
-  KC_LCTRL, KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MINS,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH,  KC_RSFT,
-                             KC_LALT, KC_LGUI,LOWER, KC_ENT,   KC_SPC,   RAISE,   KC_BSPC, KC_RGUI
+  KC_ESC,       KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,   KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
+  KC_TAB,       KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
+  KC_LCTRL,     KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,   KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
+  TD_LSFT_CAPS, KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,  KC_MINS, KC_RBRC, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+                                 KC_LALT, KC_LGUI, LOWER, KC_ENT,  KC_SPC,  RAISE,   KC_BSPC, KC_RGUI
 ),
 /*
  * COLEMAK
@@ -114,17 +118,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   K  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt |       
- *                   |      |      |      |/       /         \      \ |      |      |      |       
- *                   '----------------------------'           '------''--------------------'       
+ *                   | LAlt | LCTR |LOWER | /Enter  /       \Space \ |RAISE | RCTR | RAlt |
+ *                   |      |      |      |/       /         \      \|      |      |      |
+ *                   '--------------------'-------'           '------'--------------------'
  */
 
 [_COLEMAK] = LAYOUT(
-  KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_GRV,
-  KC_ESC,   KC_Q,   KC_W,    KC_F,    KC_P,    KC_G,                      KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN,  KC_BSPC,
-  KC_TAB,   KC_A,   KC_R,    KC_S,    KC_T,    KC_D,                      KC_H,    KC_N,    KC_E,    KC_I,    KC_O,  KC_QUOT,
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,  KC_MUTE, XXXXXXX,   KC_K,    KC_M,    KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
-                             KC_LALT, KC_LCTRL,LOWER, KC_ENT,  KC_SPC,    RAISE,   KC_RCTRL,KC_RALT
+  KC_GRV,       KC_1,   KC_2,    KC_3,    KC_4,     KC_5,                    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
+  KC_ESC,       KC_Q,   KC_W,    KC_F,    KC_P,     KC_G,                    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
+  KC_TAB,       KC_A,   KC_R,    KC_S,    KC_T,     KC_D,                    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
+  TD_LSFT_CAPS, KC_Z,   KC_X,    KC_C,    KC_V,     KC_B,  KC_MUTE, XXXXXXX, KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+                                 KC_LALT, KC_LCTRL, LOWER, KC_ENT,  KC_SPC,  RAISE,   KC_RCTRL,KC_RALT
 ),
 /*
  * NEO
@@ -137,40 +141,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|  MUTE |    |  -    |------+------+------+------+------+------|
  * |LShift|   [  |   ;  |   '  |   P  |   Z  |-------|    |-------|   B  |   M  |   ,  |   .  |   J  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt |       
- *                   |      |      |      |/       /         \      \ |      |      |      |       
- *                   '----------------------------'           '------''--------------------'       
+ *                   | LAlt | LCTR |LOWER | /Enter  /       \Space \ |RAISE | RCTR | RAlt |
+ *                   |      |      |      |/       /         \      \|      |      |      |
+ *                   '--------------------'-------'           '------'--------------------'
  */
 
 [_NEO] = LAYOUT(
-  KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_EQL,
-  KC_ESC,   KC_X,   KC_V,    KC_L,    KC_C,    KC_W,                      KC_K,    KC_H,    KC_G,    KC_F,    KC_Q,  KC_BSPC,
-  KC_TAB,   KC_U,   KC_I,    KC_A,    KC_E,    KC_O,                      KC_S,    KC_N,    KC_R,    KC_T,    KC_D,  KC_QUOT,
-  KC_LSFT,  KC_LBRC,KC_SCLN, KC_QUOT, KC_P,    KC_Z,  KC_MUTE, KC_MINS,   KC_B,    KC_M,    KC_COMM, KC_DOT, KC_SLSH,KC_RSFT,
-                             KC_LALT, KC_LCTRL,LOWER, KC_ENT,  KC_SPC,    RAISE,   KC_RCTRL,KC_RALT
-),
-/*
- * QWERTZ
- * ,-----------------------------------------.                    ,-----------------------------------------.
- * | ESC  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `   |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  |  [   |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |LCTRL |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
- * |------+------+------+------+------+------|   -   |    |    ]  |------+------+------+------+------+------|
- * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
- * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
- *                   |      |      |      |/       /         \      \ |      |      |      |
- *                   `----------------------------'           '------''--------------------'
- */
-
- [_QWERTZ] = LAYOUT(
-  KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
-  KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC,
-  KC_LCTRL, KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MINS,  KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-                             KC_LALT, KC_LGUI,LOWER, KC_SPC,   KC_ENT,   RAISE,   KC_BSPC, KC_RGUI
+  KC_GRV,       KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_EQL,
+  KC_ESC,       KC_X,   KC_V,    KC_L,    KC_C,    KC_W,                      KC_K,    KC_H,    KC_G,    KC_F,    KC_Q,  KC_BSPC,
+  KC_TAB,       KC_U,   KC_I,    KC_A,    KC_E,    KC_O,                      KC_S,    KC_N,    KC_R,    KC_T,    KC_D,  KC_QUOT,
+  TD_LSFT_CAPS, KC_LBRC,KC_SCLN, KC_QUOT, KC_P,    KC_Z,  KC_MUTE, KC_MINS,   KC_B,    KC_M,    KC_COMM, KC_DOT, KC_SLSH,KC_RSFT,
+                                 KC_LALT, KC_LCTRL,LOWER, KC_ENT,  KC_SPC,    RAISE,   KC_RCTRL,KC_RALT
 ),
 /* LOWER
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -182,16 +163,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------|      |   _  |   +  |   {  |   }  |   |  |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
- *                   |      |      |      |/       /         \      \ |      |      |      |
- *                   `----------------------------'           '------''--------------------'
+ *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \ |RAISE |BackSP| RGUI |
+ *                   |      |      |      |/       /         \      \|      |      |      |
+ *                   `--------------------'-------'           '------'--------------------'
  */
 [_LOWER] = LAYOUT(
   _______, _______, _______, _______, _______, _______,                   _______, _______, _______,_______, _______, _______,
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-  KC_GRV, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_TILD,
+  KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_TILD,
   _______, _______, _______, _______, _______, _______, _______, _______, XXXXXXX, KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE,
-                             _______, _______, _______, _______, _______,  _______, _______, _______
+                             _______, _______, _______, _______, _______, _______, _______, _______
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -203,9 +184,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
  * |  F7  |  F8  |  F9  | F10  | F11  | F12  |-------|    |-------|   +  |   -  |   =  |   [  |   ]  |   \  |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
- *                   |      |      |      |/       /         \      \ |      |      |      |
- *                   `----------------------------'           '------''--------------------'
+ *                   | LAlt | LGUI |LOWER | /Space  /       \Enter \ |RAISE |BackSP| RGUI |
+ *                   |      |      |      |/       /         \      \|      |      |      |
+ *                   `--------------------'-------'           '------'--------------------'
  */
 
 [_RAISE] = LAYOUT(
@@ -216,25 +197,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                              _______, _______, _______,  _______, _______,  _______, _______, _______
 ),
 /* ADJUST
- * ,-----------------------------------------.                     ,-----------------------------------------.
- * |      |      |      |      |       |      |                    | BL TG| BL + |RGB TG| HUE+ | SAT+ | VAL+ |
- * |------+------+------+------+-------+------|                    |------+------+------+------+------+------|
- * | RESET|      |QWERTZ|  NEO |COLEMAK|      |                    |BL MOD| BL - | MODE | HUE- | SAT- | VAL- |
- * |------+------+------+------+-------+------|                    |------+------+------+------+------+------|
- * |      |      |      |      |       | GAME |-------.    ,-------|      | MUTE | VOLDO| VOLUP|      |      |
- * |------+------+------+------+-------+------|       |    |       |------+------+------+------+------+------|
- * |      |      |      |      |       |      |-------|    |-------|      | PREV | PLAY | NEXT |      |      |
- * `------------------------------------------/       /     \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER  | /Space  /       \Enter \  |RAISE |BackSP| RGUI |
- *                   |      |      |       |/       /         \      \ |      |      |      |
- *                   `-----------------------------'           '------''--------------------'
+ * ,-----------------------------------------------.                     ,-----------------------------------------------.
+ * | RESET |       |       |       |        |       |                    | BL TG | BL +  |RGB TG |  HUE+ |  SAT+ |  VAL+ |
+ * |-------+-------+-------+-------+--------+-------|                    |-------+-------+-------+-------+-------+-------|
+ * |       |       | QWERTZ|  NEO  |COLEMAK |       |                    |BL MOD | BL -  | MODE  |  HUE- |  SAT- |  VAL- |
+ * |-------+-------+-------+-------+--------+-------|                    |-------+-------+-------+-------+-------+-------|
+ * |       |       |       |       |        |  GAME |-------.    ,-------|       | MUTE  | VOLDO |  VOLUP|       |       |
+ * |-------+-------+-------+-------+--------+-------|       |    |       |-------+-------+-------+-------+-------+-------|
+ * |       |       |       |       |        |       |-------|    |-------|       | PREV  | PLAY  |  NEXT |       |       |
+ * `------------------------------------------------/       /     \      \-----------------------------------------------'
+ *                        | LAlt | LGUI | LOWER  | /Space  /       \Enter \  | RAISE |BackSP| RGUI |
+ *                        |      |      |        |/       /         \      \ |       |      |      |
+ *                        `----------------------'-------'           '------''---------------------'
  */
   [_ADJUST] = LAYOUT(
-  XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,    XXXXXXX,                   BL_TOGG, BL_INC,  RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI,
-  RESET,   XXXXXXX, KC_QWERTZ, KC_NEO,  KC_COLEMAK, XXXXXXX,                   BL_STEP, BL_DEC,  RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD,
-  XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,    KC_GAMING,                 XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX,
-  XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
-                               _______, _______,    _______, _______, _______, _______, _______, _______
+  RESET,   XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,    XXXXXXX,                    BL_TOGG, BL_INC,  RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI,
+  XXXXXXX, XXXXXXX, KC_QWERTZ, KC_NEO,  KC_COLEMAK, XXXXXXX,                    BL_STEP, BL_DEC,  RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD,
+  XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,    KC_GAMING,                  XXXXXXX, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX,
+  XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
+                               _______, _______,    _______,  _______, _______, _______, _______, _______
   )
 };
 
@@ -317,8 +298,8 @@ static void render_logo(void) {
  *           0x12, 0x1a, 0x1b, 0x0b, 
  *           0x00, 0x1f, 0x1f, 0x00, 
  *           0x1f, 0x1f, 0x00, 0x00, 
- *           0x00, 0x00, 0x00, 0x00, 
- *           0x00, 0x00, 0x00, 0x00
+ *           0x00,0x00,0x00,0x00,
+ *           0x00,0x00,0x00,0x00
  *       };
  *   oled_write_raw_P(hell_logo, sizeof(hell_logo));
  */
@@ -327,40 +308,40 @@ static void render_logo(void) {
 
 /* 32 * 14 os logos */
 static const char PROGMEM windows_logo[] = {
-    0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0xbc, 
-    0xbc, 0xbe, 0xbe, 0x00, 
-    0xbe, 0xbe, 0xbf, 0xbf, 
-    0xbf, 0xbf, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x07, 
-    0x07, 0x0f, 0x0f, 0x00, 
-    0x0f, 0x0f, 0x1f, 0x1f, 
-    0x1f, 0x1f, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0xbc,
+    0xbc, 0xbe, 0xbe, 0x00,
+    0xbe, 0xbe, 0xbf, 0xbf,
+    0xbf, 0xbf, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x07,
+    0x07, 0x0f, 0x0f, 0x00,
+    0x0f, 0x0f, 0x1f, 0x1f,
+    0x1f, 0x1f, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00
 };
 
 static const char PROGMEM mac_logo[] = {
-    0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0xc0, 
-    0xf0, 0xf8, 0xf8, 0xf8, 
-    0xf0, 0xf6, 0xfb, 0xfb, 
-    0x38, 0x10, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x01, 
-    0x07, 0x0f, 0x1f, 0x1f, 
-    0x0f, 0x0f, 0x1f, 0x1f, 
-    0x0f, 0x06, 0x00, 0x00, 
-    0x00, 0x00, 0x00, 0x00, 
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0xc0,
+    0xf0, 0xf8, 0xf8, 0xf8,
+    0xf0, 0xf6, 0xfb, 0xfb,
+    0x38, 0x10, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x01,
+    0x07, 0x0f, 0x1f, 0x1f,
+    0x0f, 0x0f, 0x1f, 0x1f,
+    0x0f, 0x06, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00
 };
 
@@ -372,12 +353,12 @@ bool            shift_held = false;
 /* KEYBOARD PET START */
 
 /* settings */
-#    define MIN_WALK_SPEED      10
-#    define MIN_RUN_SPEED       40
+#define MIN_WALK_SPEED      10
+#define MIN_RUN_SPEED       40
 
 /* advanced settings */
-#    define ANIM_FRAME_DURATION 200  // how long each frame lasts in ms
-#    define ANIM_SIZE           96   // number of bytes in array. If you change sprites, minimize for adequate firmware size. max is 1024
+#define ANIM_FRAME_DURATION 200  // how long each frame lasts in ms
+#define ANIM_SIZE           96   // number of bytes in array. If you change sprites, minimize for adequate firmware size. max is 1024
 
 /* timers */
 uint32_t anim_timer = 0;
@@ -397,295 +378,295 @@ bool showedJump = true;
 /* logic */
 static void render_luna(int LUNA_X, int LUNA_Y) {
     /* Sit */
-    static const char PROGMEM sit[2][ANIM_SIZE] = 
+    static const char PROGMEM sit[2][ANIM_SIZE] =
     {/* 'sit1', 32x22px */
        {
-           0x00, 0x00, 0x00, 0x00, 
-           0x00, 0x00, 0x00, 0x00, 
-           0x00, 0x00, 0x00, 0x00, 
-           0x00, 0x00, 0xe0, 0x1c, 
-           0x02, 0x05, 0x02, 0x24, 
-           0x04, 0x04, 0x02, 0xa9, 
-           0x1e, 0xe0, 0x00, 0x00, 
-           0x00, 0x00, 0x00, 0x00, 
-           0x00, 0x00, 0x00, 0x00, 
-           0x00, 0x00, 0xe0, 0x10, 
-           0x08, 0x68, 0x10, 0x08, 
-           0x04, 0x03, 0x00, 0x00, 
-           0x00, 0x00, 0x00, 0x00, 
-           0x00, 0x02, 0x06, 0x82, 
-           0x7c, 0x03, 0x00, 0x00, 
-           0x00, 0x00, 0x00, 0x00, 
-           0x00, 0x00, 0x00, 0x00, 
-           0x00, 0x00, 0x01, 0x02, 
-           0x04, 0x0c, 0x10, 0x10, 
-           0x20, 0x20, 0x20, 0x28, 
-           0x3e, 0x1c, 0x20, 0x20, 
-           0x3e, 0x0f, 0x11, 0x1f, 
-           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00,
+           0x00, 0x00, 0x00, 0x00,
+           0x00, 0x00, 0x00, 0x00,
+           0x00, 0x00, 0xe0, 0x1c,
+           0x02, 0x05, 0x02, 0x24,
+           0x04, 0x04, 0x02, 0xa9,
+           0x1e, 0xe0, 0x00, 0x00,
+           0x00, 0x00, 0x00, 0x00,
+           0x00, 0x00, 0x00, 0x00,
+           0x00, 0x00, 0xe0, 0x10,
+           0x08, 0x68, 0x10, 0x08,
+           0x04, 0x03, 0x00, 0x00,
+           0x00, 0x00, 0x00, 0x00,
+           0x00, 0x02, 0x06, 0x82,
+           0x7c, 0x03, 0x00, 0x00,
+           0x00, 0x00, 0x00, 0x00,
+           0x00, 0x00, 0x00, 0x00,
+           0x00, 0x00, 0x01, 0x02,
+           0x04, 0x0c, 0x10, 0x10,
+           0x20, 0x20, 0x20, 0x28,
+           0x3e, 0x1c, 0x20, 0x20,
+           0x3e, 0x0f, 0x11, 0x1f,
+           0x00, 0x00, 0x00, 0x00,
            0x00, 0x00, 0x00, 0x00,
        },
 
        /* 'sit2', 32x22px */
        {
-           0x00, 0x00, 0x00, 0x00, 
-           0x00, 0x00, 0x00, 0x00, 
-           0x00, 0x00, 0x00, 0x00, 
-           0x00, 0x00, 0xe0, 0x1c, 
-           0x02, 0x05, 0x02, 0x24, 
-           0x04, 0x04, 0x02, 0xa9, 
-           0x1e, 0xe0, 0x00, 0x00, 
-           0x00, 0x00, 0x00, 0x00, 
-           0x00, 0x00, 0x00, 0x00, 
-           0x00, 0xe0, 0x90, 0x08, 
-           0x18, 0x60, 0x10, 0x08, 
-           0x04, 0x03, 0x00, 0x00, 
-           0x00, 0x00, 0x00, 0x00, 
-           0x00, 0x02, 0x0e, 0x82, 
-           0x7c, 0x03, 0x00, 0x00, 
-           0x00, 0x00, 0x00, 0x00, 
-           0x00, 0x00, 0x00, 0x00, 
-           0x00, 0x00, 0x01, 0x02, 
-           0x04, 0x0c, 0x10, 0x10, 
-           0x20, 0x20, 0x20, 0x28, 
-           0x3e, 0x1c, 0x20, 0x20, 
-           0x3e, 0x0f, 0x11, 0x1f, 
-           0x00, 0x00, 0x00, 0x00, 
+           0x00, 0x00, 0x00, 0x00,
+           0x00, 0x00, 0x00, 0x00,
+           0x00, 0x00, 0x00, 0x00,
+           0x00, 0x00, 0xe0, 0x1c,
+           0x02, 0x05, 0x02, 0x24,
+           0x04, 0x04, 0x02, 0xa9,
+           0x1e, 0xe0, 0x00, 0x00,
+           0x00, 0x00, 0x00, 0x00,
+           0x00, 0x00, 0x00, 0x00,
+           0x00, 0xe0, 0x90, 0x08,
+           0x18, 0x60, 0x10, 0x08,
+           0x04, 0x03, 0x00, 0x00,
+           0x00, 0x00, 0x00, 0x00,
+           0x00, 0x02, 0x0e, 0x82,
+           0x7c, 0x03, 0x00, 0x00,
+           0x00, 0x00, 0x00, 0x00,
+           0x00, 0x00, 0x00, 0x00,
+           0x00, 0x00, 0x01, 0x02,
+           0x04, 0x0c, 0x10, 0x10,
+           0x20, 0x20, 0x20, 0x28,
+           0x3e, 0x1c, 0x20, 0x20,
+           0x3e, 0x0f, 0x11, 0x1f,
+           0x00, 0x00, 0x00, 0x00,
            0x00, 0x00, 0x00, 0x00
         }
     };
 
     /* Walk */
-    static const char PROGMEM walk[2][ANIM_SIZE] = 
+    static const char PROGMEM walk[2][ANIM_SIZE] =
     {/* 'walk1', 32x22px */
         {
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x80, 0x40, 0x20, 
-            0x10, 0x90, 0x90, 0x90, 
-            0xa0, 0xc0, 0x80, 0x80, 
-            0x80, 0x70, 0x08, 0x14, 
-            0x08, 0x90, 0x10, 0x10, 
-            0x08, 0xa4, 0x78, 0x80, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x07, 0x08, 0xfc, 
-            0x01, 0x00, 0x00, 0x00, 
-            0x00, 0x80, 0x00, 0x00, 
-            0x01, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x08, 
-            0x18, 0xea, 0x10, 0x0f, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x03, 
-            0x1c, 0x20, 0x20, 0x3c, 
-            0x0f, 0x11, 0x1f, 0x03, 
-            0x06, 0x18, 0x20, 0x20, 
-            0x3c, 0x0c, 0x12, 0x1e, 
-            0x01, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x80, 0x40, 0x20,
+            0x10, 0x90, 0x90, 0x90,
+            0xa0, 0xc0, 0x80, 0x80,
+            0x80, 0x70, 0x08, 0x14,
+            0x08, 0x90, 0x10, 0x10,
+            0x08, 0xa4, 0x78, 0x80,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x07, 0x08, 0xfc,
+            0x01, 0x00, 0x00, 0x00,
+            0x00, 0x80, 0x00, 0x00,
+            0x01, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x08,
+            0x18, 0xea, 0x10, 0x0f,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x03,
+            0x1c, 0x20, 0x20, 0x3c,
+            0x0f, 0x11, 0x1f, 0x03,
+            0x06, 0x18, 0x20, 0x20,
+            0x3c, 0x0c, 0x12, 0x1e,
+            0x01, 0x00, 0x00, 0x00,
             0x00, 0x00, 0x00, 0x00
         },
 
         /* 'walk2', 32x22px */
         {
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x80, 0x40, 
-            0x20, 0x20, 0x20, 0x40, 
-            0x80, 0x00, 0x00, 0x00, 
-            0x00, 0xe0, 0x10, 0x28, 
-            0x10, 0x20, 0x20, 0x20, 
-            0x10, 0x48, 0xf0, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x1f, 0x20, 0xf8, 
-            0x02, 0x01, 0x01, 0x01, 
-            0x01, 0x01, 0x01, 0x01, 
-            0x03, 0x00, 0x00, 0x00, 
-            0x00, 0x01, 0x00, 0x10, 
-            0x30, 0xd5, 0x20, 0x1f, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x3f, 
-            0x20, 0x30, 0x0c, 0x02, 
-            0x05, 0x09, 0x12, 0x1e, 
-            0x02, 0x1c, 0x14, 0x08, 
-            0x10, 0x20, 0x2c, 0x32, 
-            0x01, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x80, 0x40,
+            0x20, 0x20, 0x20, 0x40,
+            0x80, 0x00, 0x00, 0x00,
+            0x00, 0xe0, 0x10, 0x28,
+            0x10, 0x20, 0x20, 0x20,
+            0x10, 0x48, 0xf0, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x1f, 0x20, 0xf8,
+            0x02, 0x01, 0x01, 0x01,
+            0x01, 0x01, 0x01, 0x01,
+            0x03, 0x00, 0x00, 0x00,
+            0x00, 0x01, 0x00, 0x10,
+            0x30, 0xd5, 0x20, 0x1f,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x3f,
+            0x20, 0x30, 0x0c, 0x02,
+            0x05, 0x09, 0x12, 0x1e,
+            0x02, 0x1c, 0x14, 0x08,
+            0x10, 0x20, 0x2c, 0x32,
+            0x01, 0x00, 0x00, 0x00,
             0x00, 0x00, 0x00, 0x00
         }
     };
 
     /* Run */
-    static const char PROGMEM run[2][ANIM_SIZE] = 
+    static const char PROGMEM run[2][ANIM_SIZE] =
     {/* 'run1', 32x22px */
         {
-            0x00, 0x00, 0x00, 0x00, 
-            0xe0, 0x10, 0x08, 0x08, 
-            0xc8, 0xb0, 0x80, 0x80, 
-            0x80, 0x80, 0x80, 0x80, 
-            0x80, 0x40, 0x40, 0x3c, 
-            0x14, 0x04, 0x08, 0x90, 
-            0x18, 0x04, 0x08, 0xb0, 
-            0x40, 0x80, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x01, 0x02, 0xc4, 0xa4, 
-            0xfc, 0x00, 0x00, 0x00, 
-            0x00, 0x80, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x80, 
-            0xc8, 0x58, 0x28, 0x2a, 
-            0x10, 0x0f, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x0e, 0x09, 0x04, 
-            0x04, 0x04, 0x04, 0x02, 
-            0x03, 0x02, 0x01, 0x01, 
-            0x02, 0x02, 0x04, 0x08, 
-            0x10, 0x26, 0x2b, 0x32, 
-            0x04, 0x05, 0x06, 0x00, 
+            0x00, 0x00, 0x00, 0x00,
+            0xe0, 0x10, 0x08, 0x08,
+            0xc8, 0xb0, 0x80, 0x80,
+            0x80, 0x80, 0x80, 0x80,
+            0x80, 0x40, 0x40, 0x3c,
+            0x14, 0x04, 0x08, 0x90,
+            0x18, 0x04, 0x08, 0xb0,
+            0x40, 0x80, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x01, 0x02, 0xc4, 0xa4,
+            0xfc, 0x00, 0x00, 0x00,
+            0x00, 0x80, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x80,
+            0xc8, 0x58, 0x28, 0x2a,
+            0x10, 0x0f, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x0e, 0x09, 0x04,
+            0x04, 0x04, 0x04, 0x02,
+            0x03, 0x02, 0x01, 0x01,
+            0x02, 0x02, 0x04, 0x08,
+            0x10, 0x26, 0x2b, 0x32,
+            0x04, 0x05, 0x06, 0x00,
             0x00, 0x00, 0x00, 0x00
         },
 
         /* 'run2', 32x22px */
         {
-            0x00, 0x00, 0x00, 0xe0, 
-            0x10, 0x10, 0xf0, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x80, 
-            0x80, 0x80, 0x78, 0x28, 
-            0x08, 0x10, 0x20, 0x30, 
-            0x08, 0x10, 0x20, 0x40, 
-            0x80, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x03, 
-            0x04, 0x08, 0x10, 0x11, 
-            0xf9, 0x01, 0x01, 0x01, 
-            0x01, 0x01, 0x01, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x01, 
-            0x10, 0xb0, 0x50, 0x55, 
-            0x20, 0x1f, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x01, 0x02, 0x0c, 
-            0x10, 0x20, 0x28, 0x37, 
-            0x02, 0x1e, 0x20, 0x20, 
-            0x18, 0x0c, 0x14, 0x1e, 
-            0x01, 0x00, 0x00, 0x00, 
+            0x00, 0x00, 0x00, 0xe0,
+            0x10, 0x10, 0xf0, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x80,
+            0x80, 0x80, 0x78, 0x28,
+            0x08, 0x10, 0x20, 0x30,
+            0x08, 0x10, 0x20, 0x40,
+            0x80, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x03,
+            0x04, 0x08, 0x10, 0x11,
+            0xf9, 0x01, 0x01, 0x01,
+            0x01, 0x01, 0x01, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x01,
+            0x10, 0xb0, 0x50, 0x55,
+            0x20, 0x1f, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x01, 0x02, 0x0c,
+            0x10, 0x20, 0x28, 0x37,
+            0x02, 0x1e, 0x20, 0x20,
+            0x18, 0x0c, 0x14, 0x1e,
+            0x01, 0x00, 0x00, 0x00,
             0x00, 0x00, 0x00, 0x00
         }
     };
 
     /* Bark */
-    static const char PROGMEM bark[2][ANIM_SIZE] = 
+    static const char PROGMEM bark[2][ANIM_SIZE] =
     {/* 'bark1', 32x22px */
         {
-            0x00, 0xc0, 0x20, 0x10, 
-            0xd0, 0x30, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x80, 0x80, 0x40, 
-            0x3c, 0x14, 0x04, 0x08, 
-            0x90, 0x18, 0x04, 0x08, 
-            0xb0, 0x40, 0x80, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x03, 0x04, 0x08, 
-            0x10, 0x11, 0xf9, 0x01, 
-            0x01, 0x01, 0x01, 0x01, 
-            0x01, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x80, 0xc8, 0x48, 0x28, 
-            0x2a, 0x10, 0x0f, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x01, 
-            0x02, 0x0c, 0x10, 0x20, 
-            0x28, 0x37, 0x02, 0x02, 
-            0x04, 0x08, 0x10, 0x26, 
-            0x2b, 0x32, 0x04, 0x05, 
-            0x06, 0x00, 0x00, 0x00, 
+            0x00, 0xc0, 0x20, 0x10,
+            0xd0, 0x30, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x80, 0x80, 0x40,
+            0x3c, 0x14, 0x04, 0x08,
+            0x90, 0x18, 0x04, 0x08,
+            0xb0, 0x40, 0x80, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x03, 0x04, 0x08,
+            0x10, 0x11, 0xf9, 0x01,
+            0x01, 0x01, 0x01, 0x01,
+            0x01, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x80, 0xc8, 0x48, 0x28,
+            0x2a, 0x10, 0x0f, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x01,
+            0x02, 0x0c, 0x10, 0x20,
+            0x28, 0x37, 0x02, 0x02,
+            0x04, 0x08, 0x10, 0x26,
+            0x2b, 0x32, 0x04, 0x05,
+            0x06, 0x00, 0x00, 0x00,
             0x00, 0x00, 0x00, 0x00
         },
 
         /* 'bark2', 32x22px */
         {
-            0x00, 0xe0, 0x10, 0x10, 
-            0xf0, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x80, 0x80, 0x40, 
-            0x40, 0x2c, 0x14, 0x04, 
-            0x08, 0x90, 0x18, 0x04, 
-            0x08, 0xb0, 0x40, 0x80, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x03, 0x04, 0x08, 
-            0x10, 0x11, 0xf9, 0x01, 
-            0x01, 0x01, 0x01, 0x01, 
-            0x01, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x80, 0xc0, 0x48, 
-            0x28, 0x2a, 0x10, 0x0f, 
-            0x20, 0x4a, 0x09, 0x10, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x01, 
-            0x02, 0x0c, 0x10, 0x20, 
-            0x28, 0x37, 0x02, 0x02, 
-            0x04, 0x08, 0x10, 0x26, 
-            0x2b, 0x32, 0x04, 0x05, 
-            0x06, 0x00, 0x00, 0x00, 
+            0x00, 0xe0, 0x10, 0x10,
+            0xf0, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x80, 0x80, 0x40,
+            0x40, 0x2c, 0x14, 0x04,
+            0x08, 0x90, 0x18, 0x04,
+            0x08, 0xb0, 0x40, 0x80,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x03, 0x04, 0x08,
+            0x10, 0x11, 0xf9, 0x01,
+            0x01, 0x01, 0x01, 0x01,
+            0x01, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x80, 0xc0, 0x48,
+            0x28, 0x2a, 0x10, 0x0f,
+            0x20, 0x4a, 0x09, 0x10,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x01,
+            0x02, 0x0c, 0x10, 0x20,
+            0x28, 0x37, 0x02, 0x02,
+            0x04, 0x08, 0x10, 0x26,
+            0x2b, 0x32, 0x04, 0x05,
+            0x06, 0x00, 0x00, 0x00,
             0x00, 0x00, 0x00, 0x00
         }};
 
     /* Sneak */
-    static const char PROGMEM sneak[2][ANIM_SIZE] = 
+    static const char PROGMEM sneak[2][ANIM_SIZE] =
     {/* 'sneak1', 32x22px */
         {
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x80, 0x40, 
-            0x40, 0x40, 0x40, 0x80, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0xc0, 0x40, 
-            0x40, 0x80, 0x00, 0x80, 
-            0x40, 0x80, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x1e, 0x21, 0xf0, 0x04, 
-            0x02, 0x02, 0x02, 0x02, 
-            0x03, 0x02, 0x02, 0x04, 
-            0x04, 0x04, 0x03, 0x01, 
-            0x00, 0x00, 0x09, 0x01, 
-            0x80, 0x80, 0xab, 0x04, 
-            0xf8, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x03, 0x1c, 
-            0x20, 0x20, 0x3c, 0x0f, 
-            0x11, 0x1f, 0x02, 0x06, 
-            0x18, 0x20, 0x20, 0x38, 
-            0x08, 0x10, 0x18, 0x04, 
-            0x04, 0x02, 0x02, 0x01, 
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x80, 0x40,
+            0x40, 0x40, 0x40, 0x80,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0xc0, 0x40,
+            0x40, 0x80, 0x00, 0x80,
+            0x40, 0x80, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x1e, 0x21, 0xf0, 0x04,
+            0x02, 0x02, 0x02, 0x02,
+            0x03, 0x02, 0x02, 0x04,
+            0x04, 0x04, 0x03, 0x01,
+            0x00, 0x00, 0x09, 0x01,
+            0x80, 0x80, 0xab, 0x04,
+            0xf8, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x03, 0x1c,
+            0x20, 0x20, 0x3c, 0x0f,
+            0x11, 0x1f, 0x02, 0x06,
+            0x18, 0x20, 0x20, 0x38,
+            0x08, 0x10, 0x18, 0x04,
+            0x04, 0x02, 0x02, 0x01,
             0x00, 0x00, 0x00, 0x00
         },
 
         /* 'sneak2', 32x22px */
         {
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x80, 0x40, 
-            0x40, 0x40, 0x80, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0xe0, 0xa0, 
-            0x20, 0x40, 0x80, 0xc0, 
-            0x20, 0x40, 0x80, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x3e, 0x41, 0xf0, 0x04, 
-            0x02, 0x02, 0x02, 0x03, 
-            0x02, 0x02, 0x02, 0x04, 
-            0x04, 0x02, 0x01, 0x00, 
-            0x00, 0x00, 0x04, 0x00, 
-            0x40, 0x40, 0x55, 0x82, 
-            0x7c, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x00, 0x00, 
-            0x00, 0x00, 0x3f, 0x20, 
-            0x30, 0x0c, 0x02, 0x05, 
-            0x09, 0x12, 0x1e, 0x04, 
-            0x18, 0x10, 0x08, 0x10, 
-            0x20, 0x28, 0x34, 0x06, 
-            0x02, 0x01, 0x01, 0x00, 
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x80, 0x40,
+            0x40, 0x40, 0x80, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0xe0, 0xa0,
+            0x20, 0x40, 0x80, 0xc0,
+            0x20, 0x40, 0x80, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x3e, 0x41, 0xf0, 0x04,
+            0x02, 0x02, 0x02, 0x03,
+            0x02, 0x02, 0x02, 0x04,
+            0x04, 0x02, 0x01, 0x00,
+            0x00, 0x00, 0x04, 0x00,
+            0x40, 0x40, 0x55, 0x82,
+            0x7c, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x3f, 0x20,
+            0x30, 0x0c, 0x02, 0x05,
+            0x09, 0x12, 0x1e, 0x04,
+            0x18, 0x10, 0x08, 0x10,
+            0x20, 0x28, 0x34, 0x06,
+            0x02, 0x01, 0x01, 0x00,
             0x00, 0x00, 0x00, 0x00
         }};
 
@@ -775,9 +756,9 @@ static void print_status_narrow(void) {
     oled_set_cursor(0, 3);
 
     switch (get_highest_layer(default_layer_state)) {
-        // case _QWERTY:
-            // oled_write("QWRTY", false);
-            // break;
+      /*case _QWERTY:
+            oled_write("QWRTY", false);
+            break; */
         case _QWERTZ:
             oled_write("QWRTZ", false);
             break;
@@ -862,11 +843,11 @@ void oled_task_user(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        // case KC_QWERTY:
-            // if (record->event.pressed) {
-                // set_single_persistent_default_layer(_QWERTY);
-            // }
-            // return false;
+      /*case KC_QWERTY:
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(_QWERTY);
+            }
+            return false; */
         case KC_QWERTZ:
             if (record->event.pressed) {
                 set_single_persistent_default_layer(_QWERTZ);
@@ -1103,7 +1084,48 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-// Rotary encoder related code
+/* Tap Dance definitions */
+#ifdef TAP_DANCE_ENABLE
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+    // Tap once for Escape, twice for Caps Lock
+    [TD_LSFT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
+};
+
+#endif
+
+/* RGB Matrix related code */
+#ifdef RGB_MATRIX_ENABLE
+
+void matrix_init_user(void) {
+    led_config_t g_led_config = { { // underlight fehlt noch...
+      // Key Matrix to LED Index
+    //   {     11,     10,      9,      8,      7,      6, NO_LED, NO_LED,      5,      4,      3,      2,      1,      0},
+    //   {     23,     22,     21,     20,     19,     18, NO_LED, NO_LED,     17,     16,     15,     14,     13,     12},
+    //   {     35,     34,     33,     32,     31,     30, NO_LED, NO_LED,     29,     28,     27,     26,     25,     24},
+    //   {     49,     48,     47,     46,     45,     44,     43,     42,     41,     40,     39,     38,     37,     36},
+    //   { NO_LED, NO_LED, NO_LED,     57,     56,     55,     54,     53,     52,     51,     50, NO_LED, NO_LED, NO_LED},
+      {     11,     10,      9,      8,      7,      6,                      5,      4,      3,      2,      1,      0},
+      {     23,     22,     21,     20,     19,     18,                     17,     16,     15,     14,     13,     12},
+      {     35,     34,     33,     32,     31,     30,                     29,     28,     27,     26,     25,     24},
+      {     49,     48,     47,     46,     45,     44,     43,     42,     41,     40,     39,     38,     37,     36},
+      {                             57,     56,     55,     54,     53,     52,     51,     50                        },
+    }, {
+      // LED Index to Physical Position
+      {   0,   0 }, {  16,   0 }, {  32,   0 }, {  48,   0 }, {  64,   0 }, {   80,   0 },                               { 128,   0 }, { 144,   0 }, { 160,   0 }, { 176,   0 }, { 192,   0 }, { 224,   0 },
+      {   0,  16 }, {  16,  16 }, {  32,  16 }, {  48,  16 }, {  64,  16 }, {   80,  16 },                               { 128,  16 }, { 144,  16 }, { 160,  16 }, { 176,  16 }, { 192,  16 }, { 224,  16 },
+      {   0,  32 }, {  16,  32 }, {  32,  32 }, {  48,  32 }, {  64,  32 }, {   80,  32 },                               { 128,  32 }, { 144,  32 }, { 160,  32 }, { 176,  32 }, { 192,  32 }, { 224,  32 },
+      {   0,  48 }, {  16,  48 }, {  32,  48 }, {  48,  48 }, {  64,  48 }, {   80,  48 }, {   96,  48 }, {  112,  48 }, { 128,  48 }, { 144,  48 }, { 160,  48 }, { 176,  48 }, { 192,  48 }, { 224,  48 },
+                                                {  48,  64 }, {  64,  64 }, {   80,  64 }, {   96,  64 }, {  112,  64 }, { 128,  64 }, { 144,  64 }, { 160,  64 }
+    }, {
+      // LED Index to Flag (1 - modifier, 2 - underglow, 4 - key backlight)
+      1, 4, 4, 4, 4, 1
+    } };
+}
+
+#endif
+
+/* Rotary encoder related code */
 #ifdef ENCODER_ENABLE
 
 bool encoder_update_user(uint8_t index, bool clockwise) {
