@@ -48,12 +48,12 @@ enum custom_keycodes {
     KC_LSTRT,                   // home
     KC_LEND,                    // end
     KC_DLINE,                   // delete line
-    // KC_BSPC_DEL,                //
+    KC_BSPC_DEL,                //
     KC_LAYER,                   //
 };
 
 enum {
-    TD_LSFT_CAPS
+    TD_LSFT_CAPS,
 };
 
 #define RAISE MO(_RAISE)
@@ -371,7 +371,7 @@ static const char PROGMEM mac_logo[] = {
 /* Smart Backspace Delete */
 
 bool            shift_held = false;
-// static uint16_t held_shift = 0;
+static uint16_t held_shift = 0;
 
 /* KEYBOARD PET START */
 
@@ -1038,29 +1038,29 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
 
         /* Smart Backspace Delete */
-      /*
-       * case KC_RSFT:
-       * case KC_LSFT:
-       *     shift_held = record->event.pressed;
-       *     held_shift = keycode;
-       *     break;
-       * case KC_BSPC_DEL:
-       *     if (record->event.pressed) {
-       *         if (shift_held) {
-       *             unregister_code(held_shift);
-       *             register_code(KC_DEL);
-       *         } else {
-       *             register_code(KC_BSPC);
-       *         }
-       *     } else {
-       *         unregister_code(KC_DEL);
-       *         unregister_code(KC_BSPC);
-       *         if (shift_held) {
-       *             register_code(held_shift);
-       *         }
-       *     }
-       *     return false;
-       */
+
+        case KC_RSFT:
+        case KC_LSFT:
+            shift_held = record->event.pressed;
+            held_shift = keycode;
+            break;
+        case KC_BSPC_DEL:
+            if (record->event.pressed) {
+                if (shift_held) {
+                    unregister_code(held_shift);
+                    register_code(KC_DEL);
+                } else {
+                    register_code(KC_BSPC);
+                }
+            } else {
+                unregister_code(KC_DEL);
+                unregister_code(KC_BSPC);
+                if (shift_held) {
+                    register_code(held_shift);
+                }
+            }
+            return false;
+
             /* LAYER */
 
         case KC_LAYER:
