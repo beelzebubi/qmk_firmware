@@ -33,13 +33,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #   define RGBLIGHT_VAL_STEP 6 // number of steps to increment the brightness by
 #   define RGBLIGHT_SLEEP //  the RGB lighting will be switched off when the host goes to sleep
 #   define RGBLIGHT_SPLIT // synchronization functionality for split keyboards
-#   undef RGBLIGHT_ANIMATIONS
-#   define RGBLIGHT_EFFECT_BREATHING
+#   undef RGBLIGHT_ANIMATIONS // disable all RGBLIGHT effects
+// #   define RGBLIGHT_EFFECT_BREATHING
 #   define RGBLIGHT_EFFECT_RAINBOW_MOOD
 #endif
 
 #ifdef OLED_ENABLE
-// #   define OLED_DISABLE_TIMEOUT
+#   define OLED_DISABLE_TIMEOUT
 #endif
 
 #ifdef RGB_MATRIX_ENABLE
