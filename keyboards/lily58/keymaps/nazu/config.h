@@ -35,7 +35,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #   define RGBLIGHT_SPLIT // synchronization functionality for split keyboards
 #   undef RGBLIGHT_ANIMATIONS // disable all RGBLIGHT effects
 // #   define RGBLIGHT_EFFECT_BREATHING
-#   define RGBLIGHT_EFFECT_RAINBOW_MOOD
+// #   define RGBLIGHT_EFFECT_RAINBOW_MOOD
+#   define RGBLIGHT_EFFECT_RAINBOW_SWIRL
 #endif
 
 #ifdef OLED_ENABLE
@@ -97,6 +98,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #   define DISABLE_RGB_MATRIX_SOLID_SPLASH
 #   define DISABLE_RGB_MATRIX_SOLID_MULTISPLASH
 #   define RGB_MATRIX_TYPING_HEATMAP_DECREASE_DELAY_MS 50
+#endif
+
+#ifdef TAP_DANCE_ENABLE
+#   define TAPPING_TERM 200
 #endif
 
 // If you are using an Elite C rev3 on the slave side, uncomment the lines below:
