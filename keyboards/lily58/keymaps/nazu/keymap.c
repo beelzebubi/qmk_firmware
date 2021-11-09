@@ -200,23 +200,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |   7  |   8  |   9  |   /  |      |      |
+ * |      |      |      |      |      |      |                    |      |   7  |   8  |   9  |   /  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |  Up  |      |      |      |                    |   4  |   5  |   6  |   *  |      |      |
+ * |      |      |  Up  |      |      |      |                    |      |   4  |   5  |   6  |   *  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |LCTRL | Left | Down |Right |      |      |-------.    ,-------|   1  |   2  |   3  |   -  |      |      |
+ * |LCTRL | Left | Down |Right |      |      |-------.    ,-------|      |   1  |   2  |   3  |   -  |      |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |LShift|      |      |      |      |      |-------|    |-------|   0  |   ,  |   .  |   +  |      |RShift|
+ * |LShift|      |      |      |      |      |-------|    |-------|      |   0  |   ,  |   .  |   +  |RShift|
  * `-----------------------------------------/      /      \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /Enter /        \Space \ |RAISE |BackSP| RGUI |
  *                   |      |      |      |/      /          \      \|      |      |      |
  *                   `--------------------'------´            `------'--------------------´
  */
 [_RAISE] = LAYOUT(
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     KC_7,    KC_8,    KC_9,    DE_SLSH, XXXXXXX, XXXXXXX,
-  XXXXXXX, XXXXXXX, KC_UP,   XXXXXXX, XXXXXXX, XXXXXXX,                     KC_4,    KC_5,    KC_6,    DE_ASTR, XXXXXXX, XXXXXXX,
-  XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,                     KC_1,    KC_2,    KC_3,    DE_MINS, XXXXXXX, XXXXXXX,
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,  KC_0,    KC_COMM, KC_DOT,  DE_PLUS, XXXXXXX, _______,
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, KC_7,    KC_8,    KC_9,    DE_SLSH, XXXXXXX,
+  XXXXXXX, XXXXXXX, KC_UP,   XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, KC_4,    KC_5,    KC_6,    DE_ASTR, XXXXXXX,
+  XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,                     XXXXXXX, KC_1,    KC_2,    KC_3,    DE_MINS, XXXXXXX,
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX, KC_0,    KC_COMM, KC_DOT,  DE_PLUS, _______,
                              _______, _______, _______,  _______, _______,  _______, _______, _______
 ),
 /* ADJUST
