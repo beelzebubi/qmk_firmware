@@ -19,6 +19,7 @@
 
 #include QMK_KEYBOARD_H
 #include "keymap_german.h"
+#include "keymap_colemak.h"
 
 
 extern uint8_t is_master;
@@ -111,24 +112,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
  * COLEMAK
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `   |
+ * | ESC  |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  -   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | ESC  |   Q  |   W  |   F  |   P  |   G  |                    |   J  |   L  |   U  |   Y  |   ;  | Bspc |
+ * | TAB  |   Q  |   W  |   F  |   P  |   B  |                    |   J  |   L  |   U  |   Y  |   ;  |  \   |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | TAB  |   A  |   R  |   S  |   T  |   D  |-------.    ,-------|   H  |   N  |   E  |   I  |   O  |  '   |
- * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
- * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   K  |   M  |   ,  |   .  |   /  |RShift|
+ * | LCTRL|   A  |   R  |   S  |   T  |   G  |-------.    ,-------|   M  |   N  |   E  |   I  |   O  |  '   |
+ * |------+------+------+------+------+------|   [   |    |   ]   |------+------+------+------+------+------|
+ * |LShift|   Z  |   X  |   C  |   D  |   V  |-------|    |-------|   K  |   H  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/      /      \      \-----------------------------------------'
- *                   | LAlt | LGUI |LOWER | /Enter /        \Space \ |RAISE |BackSP| RGUI |
+ *                   | LAlt | LGUI |LOWER | /Enter /        \ Space\ |RAISE |BackSP| RAlt |
  *                   |      |      |      |/      /          \      \|      |      |      |
  *                   `--------------------'------´            `------'--------------------´
  */
 
 [_COLEMAK] = LAYOUT(
-  KC_GRV,  KC_1,   KC_2,    KC_3,    KC_4,     KC_5,                    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_GRV,
-  KC_ESC,  KC_Q,   KC_W,    KC_F,    KC_P,     KC_G,                    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_BSPC,
-  KC_TAB,  KC_A,   KC_R,    KC_S,    KC_T,     KC_D,                    KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,
-  KC_LSFT, KC_Z,   KC_X,    KC_C,    KC_V,     KC_B,  KC_MUTE, XXXXXXX, KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+  KC_ESC,  CM_1,   CM_2,    CM_3,    CM_4,     CM_5,                    CM_6,    CM_7,    CM_8,    CM_9,    CM_0,    CM_MINS,
+  KC_TAB,  CM_Q,   CM_W,    CM_F,    CM_P,     CM_B,                    CM_J,    CM_L,    CM_U,    CM_Y,    CM_SCLN, CM_BSLS,
+  KC_LCTL, CM_A,   CM_R,    CM_S,    CM_T,     CM_G,                    CM_M,    CM_N,    CM_E,    CM_I,    CM_O,    CM_QUOT,
+  KC_LSFT, CM_Z,   CM_X,    CM_C,    CM_D,     CM_B,  CM_LBRC, CM_RBRC, CM_K,    CM_H,    CM_COMM, CM_DOT,  CM_SLSH, KC_RSFT,
                             KC_LALT, KC_LCTRL, LOWER, KC_ENT,  KC_SPC,  RAISE,   KC_RCTRL,KC_RALT
 ),
 /*
