@@ -40,7 +40,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #ifdef OLED_ENABLE
-#   define OLED_DISABLE_TIMEOUT
+// #   define OLED_DISABLE_TIMEOUT
+#   define OLED_TIMEOUT 120000
 #endif
 
 #ifdef RGB_MATRIX_ENABLE
