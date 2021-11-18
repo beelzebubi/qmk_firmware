@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,   DE_Q,   DE_W,    DE_E,    DE_R,    DE_T,                     DE_Z,   DE_U,    DE_I,    DE_O,    DE_P,    DE_UDIA,
   KC_LCTRL, DE_A,   DE_S,    DE_D,    DE_F,    DE_G,                     DE_H,   DE_J,    DE_K,    DE_L,    DE_ODIA, DE_ADIA,
   KC_LSFT,  DE_Y,   DE_X,    DE_C,    DE_V,    DE_B,  DE_HASH,  DE_PLUS, DE_N,   DE_M,    DE_COMM, DE_DOT,  DE_MINS, KC_RSFT,
-                             KC_LALT, KC_LGUI, LOWER, KC_ENT,   KC_SPC,  RAISE,  KC_BSPC, KC_RALT
+                             KC_LALT, KC_LGUI, LOWER, KC_SPC,   KC_ENT,  RAISE,  KC_BSPC, KC_RALT
 ),
 /*
  * COLEMAK
@@ -104,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_Q,   KC_W,    KC_E,    KC_P,     KC_B,                    KC_J,    KC_L,    KC_U,    KC_Y,    CM_SCLN, CM_BSLS,
   KC_LCTL, KC_A,   KC_R,    KC_S,    KC_T,     KC_G,                    KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    CM_QUOT,
   KC_LSFT, KC_Z,   KC_X,    KC_C,    KC_D,     KC_V,  CM_LBRC, CM_RBRC, KC_K,    KC_H,    CM_COMM, CM_DOT,  CM_SLSH, KC_RSFT,
-                            KC_LALT, KC_LGUI,  LOWER, KC_ENT,  KC_SPC,  RAISE,   KC_BSPC, KC_RALT
+                            KC_LALT, KC_LGUI, LOWER, KC_SPC,   KC_ENT,  RAISE,  KC_BSPC, KC_RALT
 ),
 /*
  * NEO
@@ -127,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ESC,   KC_X,   KC_V,    KC_L,    KC_C,    KC_W,                      KC_K,    KC_H,    KC_G,    KC_F,    KC_Q,  KC_BSPC,
   KC_TAB,   KC_U,   KC_I,    KC_A,    KC_E,    KC_O,                      KC_S,    KC_N,    KC_R,    KC_T,    KC_D,  KC_QUOT,
   KC_LSFT,  KC_LBRC,KC_SCLN, KC_QUOT, KC_P,    KC_Z,  KC_MUTE, KC_MINS,   KC_B,    KC_M,    KC_COMM, KC_DOT, KC_SLSH,KC_RSFT,
-                             KC_LALT, KC_LGUI, LOWER, KC_ENT,  KC_SPC,    RAISE,   KC_RCTRL,KC_RALT
+                             KC_LALT, KC_LGUI, LOWER, KC_SPC,   KC_ENT,  RAISE,  KC_BSPC, KC_RALT
 ),
 /*
  * GAMING
