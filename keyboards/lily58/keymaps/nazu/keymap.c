@@ -158,7 +158,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * | Tab  |   @  |   $  |   €  |      | PgUp |                    | HOME |   {  |   }  |   <  |   >  | PrnSc|
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |LCTRL |   %  |   §  |      |   ~  | PgDn |-------.    ,-------|  END |   (  |   )  |   [  |   ]  |      |
+ * |LCTRL |      |      |      |   ~  | PgDn |-------.    ,-------|  END |   (  |   )  |   [  |   ]  |      |
  * |------+------+------+------+------+------|       |    |   |   |------+------+------+------+------+------|
  * |LShift|      |      |      |      |      |-------|    |-------|   ´  |   `  |  '   |      |      |RShift|
  * `-----------------------------------------/      /      \      \-----------------------------------------'
@@ -175,23 +175,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |      |   7  |   8  |   9  |   /  |      |
+ * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |                    |  F7  |  F8  |  F9  | F10  | F11  | F12  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |      |      |  Up  |      |      |      |                    |      |   4  |   5  |   6  |   *  |      |
+ * |      |      |      |  Up  |      |      |                    |   .  |   7  |   8  |   9  |   /  |   *  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |LCTRL | Left | Down |Right |      |      |-------.    ,-------|      |   1  |   2  |   3  |   -  |      |
+ * |LCTRL |      | Left | Down |Right |      |-------.    ,-------|   ,  |   4  |   5  |   6  |   +  |   -  |
  * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
- * |LShift|      |      |      |      |      |-------|    |-------|      |   0  |   ,  |   .  |   +  |RShift|
+ * |LShift|      |      |      |      |      |-------|    |-------|   0  |   1  |   2  |   3  |      |RShift|
  * `-----------------------------------------/      /      \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /Enter /        \Space \ |RAISE |BackSP| RGUI |
  *                   |      |      |      |/      /          \      \|      |      |      |
  *                   `--------------------'------´            `------'--------------------´
  */
 [_RAISE] = LAYOUT(
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, KC_7,    KC_8,    KC_9,    DE_SLSH, XXXXXXX,
-  XXXXXXX, XXXXXXX, KC_UP,   XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, KC_4,    KC_5,    KC_6,    DE_ASTR, XXXXXXX,
-  _______, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,                     XXXXXXX, KC_1,    KC_2,    KC_3,    DE_MINS, XXXXXXX,
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX, KC_0,    KC_COMM, KC_DOT,  DE_PLUS, _______,
+  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                       KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
+  XXXXXXX, XXXXXXX, XXXXXXX, KC_UP,   XXXXXXX, XXXXXXX,                     KC_DOT,  KC_7,    KC_8,    KC_9,    DE_SLSH, DE_ASTR,
+  _______, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX,                     KC_COMM, KC_4,    KC_5,    KC_6,    DE_PLUS, DE_MINS,
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,  KC_0,    KC_1,    KC_2,    KC_3,    XXXXXXX, _______,
                              _______, _______, _______,  _______, _______,  _______, _______, _______
 ),
 /* ADJUST
