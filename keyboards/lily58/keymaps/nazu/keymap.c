@@ -58,6 +58,7 @@ enum {
 
 #define RAISE MO(_RAISE)
 #define LOWER MO(_LOWER)
+#define TD_CAPS TD(TD_LSFT_CAPS)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
@@ -77,11 +78,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
  [_QWERTZ] = LAYOUT(
-  KC_ESC,           DE_1,   DE_2,   DE_3,    DE_4,    DE_5,                     DE_6,   DE_7,    DE_8,    DE_9,    DE_0,    DE_SS,
-  KC_TAB,           DE_Q,   DE_W,   DE_E,    DE_R,    DE_T,                     DE_Z,   DE_U,    DE_I,    DE_O,    DE_P,    DE_UDIA,
-  KC_LCTL,          DE_A,   DE_S,   DE_D,    DE_F,    DE_G,                     DE_H,   DE_J,    DE_K,    DE_L,    DE_ODIA, DE_ADIA,
-  TD(TD_LSFT_CAPS), DE_Y,   DE_X,   DE_C,    DE_V,    DE_B,  DE_HASH,  DE_PLUS, DE_N,   DE_M,    DE_COMM, DE_DOT,  DE_MINS, KC_RSFT,
-                                    KC_LALT, KC_LGUI, LOWER, KC_SPC,   KC_ENT,  RAISE,  KC_BSPC, KC_RALT
+  KC_ESC,  DE_1,   DE_2,   DE_3,    DE_4,    DE_5,                     DE_6,   DE_7,    DE_8,    DE_9,    DE_0,    DE_SS,
+  KC_TAB,  DE_Q,   DE_W,   DE_E,    DE_R,    DE_T,                     DE_Z,   DE_U,    DE_I,    DE_O,    DE_P,    DE_UDIA,
+  KC_LCTL, DE_A,   DE_S,   DE_D,    DE_F,    DE_G,                     DE_H,   DE_J,    DE_K,    DE_L,    DE_ODIA, DE_ADIA,
+  TD_CAPS, DE_Y,   DE_X,   DE_C,    DE_V,    DE_B,  DE_HASH,  DE_PLUS, DE_N,   DE_M,    DE_COMM, DE_DOT,  DE_MINS, KC_RSFT,
+                           KC_LALT, KC_LGUI, LOWER, KC_SPC,   KC_ENT,  RAISE,  KC_BSPC, KC_RALT
 ),
 /*
  * COLEMAK
@@ -100,11 +101,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_COLEMAK] = LAYOUT(
-  KC_ESC,           CM_1,   CM_2,    CM_3,    CM_4,     CM_5,                    CM_6,    CM_7,    CM_8,    CM_9,    CM_0,    CM_MINS,
-  KC_TAB,           KC_Q,   KC_W,    KC_E,    KC_P,     KC_B,                    KC_J,    KC_L,    KC_U,    KC_Y,    CM_SCLN, CM_BSLS,
-  KC_LCTL,          KC_A,   KC_R,    KC_S,    KC_T,     KC_G,                    KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    CM_QUOT,
-  TD(TD_LSFT_CAPS), KC_Z,   KC_X,    KC_C,    KC_D,     KC_V,  CM_LBRC, CM_RBRC, KC_K,    KC_H,    CM_COMM, CM_DOT,  CM_SLSH, KC_RSFT,
-                                     KC_LALT, KC_LGUI,  LOWER, KC_SPC,  KC_ENT,  RAISE,   KC_BSPC, KC_RALT
+  KC_ESC,  CM_1,   CM_2,    CM_3,    CM_4,     CM_5,                    CM_6,    CM_7,    CM_8,    CM_9,    CM_0,    CM_MINS,
+  KC_TAB,  KC_Q,   KC_W,    KC_E,    KC_P,     KC_B,                    KC_J,    KC_L,    KC_U,    KC_Y,    CM_SCLN, CM_BSLS,
+  KC_LCTL, KC_A,   KC_R,    KC_S,    KC_T,     KC_G,                    KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    CM_QUOT,
+  TD_CAPS, KC_Z,   KC_X,    KC_C,    KC_D,     KC_V,  CM_LBRC, CM_RBRC, KC_K,    KC_H,    CM_COMM, CM_DOT,  CM_SLSH, KC_RSFT,
+                            KC_LALT, KC_LGUI,  LOWER, KC_SPC,  KC_ENT,  RAISE,   KC_BSPC, KC_RALT
 ),
 /*
  * NEO
