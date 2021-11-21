@@ -15,6 +15,10 @@ enum custom_keycodes {
     KC_CLMK,                 // change to COLEMAK layer
 };
 
+enum {
+    TD_LSFT_CAPS,
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* ISO 60
@@ -33,11 +37,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
 
   [_QWERTZ] = LAYOUT_60_iso_bs_rshift(
-    KC_ESC,  DE_1,    DE_2,    DE_3,    DE_4,    DE_5,    DE_6,    DE_7,    DE_8,    DE_9,    DE_0,    DE_SS,   DE_ACUT, KC_BSPC,
-    KC_TAB,  DE_Q,    DE_W,    DE_E,    DE_R,    DE_T,    DE_Z,    DE_U,    DE_I,    DE_O,    DE_P,    DE_UDIA, DE_PLUS,
-    KC_CAPS, DE_A,    DE_S,    DE_D,    DE_F,    DE_G,    DE_H,    DE_J,    DE_K,    DE_L,    DE_ODIA, DE_ADIA, DE_HASH, KC_ENT,
-    KC_LSFT, DE_LABK, DE_Y,    DE_X,    DE_C,    DE_V,    DE_B,    DE_N,    DE_M,    DE_COMM, DE_DOT,  DE_MINS, KC_RSFT, MO(_FN2),
-    KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPC,                    KC_RALT, MO(_FN1),KC_APP,  KC_LCTL
+    KC_ESC,           DE_1,    DE_2,    DE_3,    DE_4,    DE_5,    DE_6,    DE_7,    DE_8,    DE_9,    DE_0,    DE_SS,   DE_ACUT, KC_BSPC,
+    KC_TAB,           DE_Q,    DE_W,    DE_E,    DE_R,    DE_T,    DE_Z,    DE_U,    DE_I,    DE_O,    DE_P,    DE_UDIA, DE_PLUS,
+    KC_CAPS,          DE_A,    DE_S,    DE_D,    DE_F,    DE_G,    DE_H,    DE_J,    DE_K,    DE_L,    DE_ODIA, DE_ADIA, DE_HASH, KC_ENT,
+    TD(TD_LSFT_CAPS), DE_LABK, DE_Y,    DE_X,    DE_C,    DE_V,    DE_B,    DE_N,    DE_M,    DE_COMM, DE_DOT,  DE_MINS, KC_RSFT, MO(_FN2),
+    KC_LCTL,          KC_LGUI, KC_LALT,                            KC_SPC,                    KC_RALT, MO(_FN1),KC_APP,  KC_LCTL
   ),
 
 
@@ -61,11 +65,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // KC_CAPS, CM_A,    CM_R,    CM_S,    CM_T,    CM_G,    CM_M,    CM_N,    CM_E,    CM_I,    CM_O,    CM_QUOT, CM_HASH, KC_ENT,
     // KC_LSFT, CM_Z,    CM_X,    CM_C,    CM_D,    CM_V,    CM_BSLS, CM_K,    CM_H,    CM_COMM, CM_DOT,  CM_SLSH, KC_RSFT, MO(_FN2),
     // KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPC,                    KC_RALT, MO(_FN1),KC_APP,  KC_LCTL
-    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    CM_MINS, CM_EQL,  KC_BSPC,
-    KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, CM_LBRC, CM_RBRC,
-    KC_BSPC, KC_A,    KC_R,    KC_S,    KC_T,    KC_G,    KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    CM_QUOT, CM_HASH, KC_ENT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    CM_BSLS, KC_K,    KC_H,    CM_COMM, CM_DOT,  CM_SLSH, KC_RSFT, MO(_FN2),
-    KC_LCTL, KC_LGUI, KC_LALT,                            KC_SPC,                    KC_RALT, MO(_FN1),KC_APP,  KC_LCTL
+    KC_ESC,           KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    CM_MINS, CM_EQL,  KC_BSPC,
+    KC_TAB,           KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,    KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, CM_LBRC, CM_RBRC,
+    KC_BSPC,          KC_A,    KC_R,    KC_S,    KC_T,    KC_G,    KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    CM_QUOT, CM_HASH, KC_ENT,
+    TD(TD_LSFT_CAPS), KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    CM_BSLS, KC_K,    KC_H,    CM_COMM, CM_DOT,  CM_SLSH, KC_RSFT, MO(_FN2),
+    KC_LCTL,          KC_LGUI, KC_LALT,                            KC_SPC,                    KC_RALT, MO(_FN1),KC_APP,  KC_LCTL
   ),
 
   /*
@@ -128,3 +132,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
     return true;
 }
+
+/* Tap Dance definitions */
+#ifdef TAP_DANCE_ENABLE
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+    [TD_LSFT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
+};
+
+#endif
