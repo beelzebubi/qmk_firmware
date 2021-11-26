@@ -159,11 +159,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |                    |  F7  |  F8  |  F9  | F10  | F11  | F12  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  |   @  |   $  |   €  |      | PgUp |                    | HOME |   {  |   }  |   <  |   >  | PrnSc|
+ * | Tab  |   @  |   $  |   €  |   ?  | PgUp |                    | HOME |   {  |   }  |   <  |   >  | PrnSc|
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * |LCTRL |      |      |      |   ~  | PgDn |-------.    ,-------|  END |   (  |   )  |   [  |   ]  |      |
+ * |LCTRL |   ^  |   _  |   =  |   ~  | PgDn |-------.    ,-------|  END |   (  |   )  |   [  |   ]  |      |
  * |------+------+------+------+------+------|       |    |   |   |------+------+------+------+------+------|
- * |LShift|      |      |      |      |      |-------|    |-------|   ´  |   `  |  '   |      |      |RShift|
+ * |LShift|      |      |   ;  |   :  |      |-------|    |-------|   ´  |   `  |  '   |      |      |RShift|
  * `-----------------------------------------/      /      \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /Enter /        \Space \ |RAISE |Delete| RGUI |
  *                   |      |      |      |/      /          \      \|      |      |      |
@@ -171,9 +171,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT(
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-  _______, DE_AT,   DE_DLR,  DE_EURO, XXXXXXX, KC_PGUP,                   KC_HOME, DE_LCBR, DE_RCBR, DE_LABK, DE_RABK, KC_PSCR,
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, DE_TILD, KC_PGDN,                   KC_END,  DE_LPRN, DE_RPRN, DE_LBRC, DE_RBRC, XXXXXXX,
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DE_PIPE, DE_ACUT, DE_GRV,  DE_QUOT, XXXXXXX, XXXXXXX, _______,
+  _______, DE_AT,   DE_DLR,  DE_EURO, DE_QUES, KC_PGUP,                   KC_HOME, DE_LCBR, DE_RCBR, DE_LABK, DE_RABK, KC_PSCR,
+  _______, DE_CIRC, DE_UNDS, DE_EQL,  DE_TILD, KC_PGDN,                   KC_END,  DE_LPRN, DE_RPRN, DE_LBRC, DE_RBRC, XXXXXXX,
+  _______, XXXXXXX, XXXXXXX, DE_SCLN, DE_COLN, XXXXXXX, XXXXXXX, DE_PIPE, DE_ACUT, DE_GRV,  DE_QUOT, XXXXXXX, XXXXXXX, _______,
                              _______, _______, _______, _______, _______, _______, KC_DEL,  _______
 ),
 /* RAISE
