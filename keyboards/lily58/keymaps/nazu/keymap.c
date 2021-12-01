@@ -159,22 +159,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |                    |  F7  |  F8  |  F9  | F10  | F11  | F12  |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  |   @  |   $  |   €  |   ?  | PgUp |                    | HOME |   {  |   }  |   <  |   >  | PrnSc|
+ * | Tab  |   @  |   $  |   %  |   ?  | PgUp |                    | HOME |   {  |   }  |   <  |   >  | PrnSc|
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |LCTRL |   ^  |   _  |   =  |   ~  | PgDn |-------.    ,-------|  END |   (  |   )  |   [  |   ]  |      |
  * |------+------+------+------+------+------|       |    |   |   |------+------+------+------+------+------|
- * |LShift|      |      |   ;  |   :  |      |-------|    |-------|   ´  |   `  |  '   |      |      |RShift|
+ * |LShift|      |      |   ;  |   :  |      |-------|    |-------|   ´  |   '  |   "  |      |      |RShift|
  * `-----------------------------------------/      /      \      \-----------------------------------------'
  *                   | LAlt | LGUI |LOWER | /Enter /        \Space \ |RAISE |Delete| RGUI |
  *                   |      |      |      |/      /          \      \|      |      |      |
  *                   `--------------------'------´            `------'--------------------´
  */
 [_LOWER] = LAYOUT(
-  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-  _______, DE_AT,   DE_DLR,  DE_EURO, DE_QUES, KC_PGUP,                   KC_HOME, DE_LCBR, DE_RCBR, DE_LABK, DE_RABK, KC_PSCR,
-  _______, DE_CIRC, DE_UNDS, DE_EQL,  DE_TILD, KC_PGDN,                   KC_END,  DE_LPRN, DE_RPRN, DE_LBRC, DE_RBRC, XXXXXXX,
-  _______, XXXXXXX, XXXXXXX, DE_SCLN, DE_COLN, XXXXXXX, XXXXXXX, DE_PIPE, DE_ACUT, DE_GRV,  DE_QUOT, XXXXXXX, XXXXXXX, _______,
-                             _______, _______, _______, _______, _______, _______, KC_DEL,  _______
+  KC_F1,   KC_F2,   KC_F3,      KC_F4,   KC_F5,      KC_F6,                        KC_F7,   KC_F8,      KC_F9,      KC_F10,     KC_F11,    KC_F12,
+  _______, S(KC_2), S(KC_4),    S(KC_5), S(KC_SLSH), KC_PGUP,                      KC_HOME, S(KC_LBRC), S(KC_RBRC), S(KC_COMM), S(KC_DOT), KC_PSCR,
+  _______, S(KC_6), S(KC_MINS), KC_EQL,  S(KC_GRV),  KC_PGDN,                      KC_END,  S(KC_9),    S(KC_0),    KC_LBRC,    KC_RBRC,   XXXXXXX,
+  _______, XXXXXXX, XXXXXXX,    KC_SCLN, S(KC_SCLN), XXXXXXX, XXXXXXX, S(KC_BSLS), KC_GRV,  KC_QUOT,    S(KC_QUOT), XXXXXXX,    XXXXXXX,   _______,
+                                _______, _______,    _______, _______, _______,    _______, KC_DEL,     _______
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -192,18 +192,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_RAISE] = LAYOUT(
   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                       KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-  XXXXXXX, XXXXXXX, XXXXXXX, KC_UP,   XXXXXXX, XXXXXXX,                     KC_DOT,  KC_7,    KC_8,    KC_9,    DE_SLSH, DE_ASTR,
-  _______, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX,                     KC_COMM, KC_4,    KC_5,    KC_6,    DE_PLUS, DE_MINS,
-  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,  KC_0,    KC_1,    KC_2,    KC_3,    XXXXXXX, _______,
+  XXXXXXX, XXXXXXX, XXXXXXX, KC_UP,   XXXXXXX, XXXXXXX,                     KC_DOT,  KC_P7,   KC_P8,   KC_P9,   KC_PSLS, KC_PAST,
+  _______, XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX,                     KC_COMM, KC_P4,   KC_P5,   KC_P6,   KC_PPLS, KC_PMNS,
+  _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,  KC_P0,   KC_P1,   KC_P2,   KC_P3,   XXXXXXX, _______,
                              _______, _______, _______,  _______, _______,  _______, _______, _______
 ),
 /* ADJUST
  * ,-----------------------------------------------.                     ,-----------------------------------------------.
  * | RESET |       |       |       |        |       |                    |RGB TG |  HUE+ |  SAT+ |  VAL+ |       |       |
  * |-------+-------+-------+-------+--------+-------|                    |-------+-------+-------+-------+-------+-------|
- * |       |       | QWERTZ|  NEO  |COLEMAK |       |                    | MODE  |  HUE- |  SAT- |  VAL- |       |       |
+ * |       |       | QWERTZ|       |COLEMAK |       |                    | MODE  |  HUE- |  SAT- |  VAL- |       |       |
  * |-------+-------+-------+-------+--------+-------|                    |-------+-------+-------+-------+-------+-------|
- * |       |       |       |       |        |  GAME |-------.    ,-------|       | MUTE  | VOLDO |  VOLUP|       |       |
+ * |       |       |       |       |        |       |-------.    ,-------|       | MUTE  | VOLDO |  VOLUP|       |       |
  * |-------+-------+-------+-------+--------+-------|       |    |       |-------+-------+-------+-------+-------+-------|
  * |       |       |       |       |        |       |-------|    |-------|       | PREV  | PLAY  |  NEXT |       |       |
  * `------------------------------------------------/      /      \      \-----------------------------------------------'
