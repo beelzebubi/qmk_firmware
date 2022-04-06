@@ -13,3 +13,4 @@ AUDIO_ENABLE = no
 AUTO_SHIFT_ENABLE = no  # If the time depressed is greater than or equal to the AUTO_SHIFT_TIMEOUT, then a shifted version of the key is emitted. If the time is less than the AUTO_SHIFT_TIMEOUT time, then the normal state is emitted
 TAP_DANCE_ENABLE = yes
 LTO_ENABLE = yes 	    # significantly reduce the compiled size, but disable the legacy TMK Macros and Functions features
+VIA_ENABLE = yes
