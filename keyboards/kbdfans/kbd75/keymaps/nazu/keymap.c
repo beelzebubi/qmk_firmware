@@ -86,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |-----------------------------------------------------------------------------------------------|
    * | Shift | < > |  Y  |  X  |  C  |  V  |  B  |  N  |  M  | , ; | . : | - _ |  Shift  | Up  | End |
    * |-----------------------------------------------------------------------------------------------|
-   * | LCtl  | LAlt  | LGUI  |            Space                  |RGUI | FN1 |RAlt |Left |Down |Right|
+   * | LCtl  | LAlt  | LGUI  |            Space                  |RGUI |RAlt | FN1 |Left |Down |Right|
    * `-----------------------------------------------------------------------------------------------´
    */
 	[_MACOS] = LAYOUT_iso_1u(
@@ -95,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,   DE_Q,     DE_W,     DE_E,     DE_R,     DE_T,     DE_Z,     DE_U,     DE_I,     DE_O,     DE_P,     DE_UDIA,  DE_PLUS,            KC_ENT,   KC_PGUP,
     KC_CAPS,  DE_A,     DE_S,     DE_D,     DE_F,     DE_G,     DE_H,     DE_J,     DE_K,     DE_L,     DE_ODIA,  DE_ADIA,  KC_BSLS,                      KC_PGDN,
     KC_LSFT,  DE_LABK,  DE_Y,     DE_X,     DE_C,     DE_V,     DE_B,     DE_N,     DE_M,     DE_COMM,  DE_DOT,   DE_MINS,  KC_RSFT,            KC_UP,    KC_END,
-    KC_LCTL,  KC_LALT,  KC_LGUI,                                KC_SPC,                                 KC_RGUI,  MO(_FN1), KC_RALT,  KC_LEFT,  KC_DOWN,  KC_RGHT
+    KC_LCTL,  KC_LALT,  KC_LGUI,                                KC_SPC,                                 KC_RGUI,  KC_RALT, MO(_FN1),  KC_LEFT,  KC_DOWN,  KC_RGHT
   ),
 
 	[_FN1] = LAYOUT_iso_1u(
