@@ -33,6 +33,7 @@ enum custom_keycodes {
     KC_MAC,                 // change to MACOS layer
     KC_EMOM,                // shortcut for emoji picker in MACOS
     KC_EMOW,                // shortcut for emoji picker in WINDOWS
+    LALT_F4,                // shortcut for LALT+F4
 };
 
 enum {
@@ -42,6 +43,7 @@ enum {
 #define TD_CAPS TD(TD_LSFT_CAPS)
 #define KC_EMOM LCTL(LALT(KC_SPACE))
 #define KC_EMOW LGUI(KC_DOT)
+#define LALT_F4 LM(_FN2, MOD_LALT)
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -65,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,   DE_Q,     DE_W,     DE_E,     DE_R,     DE_T,     DE_Z,     DE_U,     DE_I,     DE_O,     DE_P,     DE_UDIA,  DE_PLUS,  KC_BSLS,            KC_PGUP,
     KC_CAPS,  DE_A,     DE_S,     DE_D,     DE_F,     DE_G,     DE_H,     DE_J,     DE_K,     DE_L,     DE_ODIA,  DE_ADIA,            KC_ENT,             KC_PGDN,
     KC_LSFT,            DE_Y,     DE_X,     DE_C,     DE_V,     DE_B,     DE_N,     DE_M,     DE_COMM,  DE_DOT,   DE_MINS,  KC_RSFT,            KC_UP,    KC_END,
-    KC_LCTL,  KC_LGUI,  KC_LALT,                                KC_SPC,                                 KC_RALT,  MO(_FN1),           KC_LEFT,  KC_DOWN,  KC_RGHT
+    KC_LCTL,  KC_LGUI,  LALT_F4,                                KC_SPC,                                 KC_RALT,  MO(_FN1),           KC_LEFT,  KC_DOWN,  KC_RGHT
   ),
 
   /*
@@ -87,7 +89,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,   KC_Q,     KC_W,     KC_F,     KC_P,     KC_B,     KC_J,     KC_L,     KC_U,     KC_Y,     KC_SCLN,  KC_LBRC,  KC_RBRC,  KC_BSLS,            KC_PGUP,
     KC_BSPC,  KC_A,     KC_R,     KC_S,     KC_T,     KC_G,     KC_M,     KC_N,     KC_E,     KC_I,     KC_O,     KC_QUOT,            KC_ENT,             KC_PGDN,
     TD_CAPS,            KC_Z,     KC_X,     KC_C,     KC_D,     KC_V,     KC_K,     KC_H,     KC_COMM,  KC_DOT,   KC_SLSH,  KC_RSFT,            KC_UP,    KC_END,
-    KC_LCTL,  KC_LGUI,  LM(_FN2, MOD_LALT),                          KC_SPC,                            KC_RALT,  MO(_FN1),           KC_LEFT,  KC_DOWN,  KC_RGHT
+    KC_LCTL,  KC_LGUI,  LALT_F4,                                KC_SPC,                                 KC_RALT,  MO(_FN1),           KC_LEFT,  KC_DOWN,  KC_RGHT
 ),
 
   /*
@@ -125,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,            XXXXXXX,
     XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,                                XXXXXXX,                                XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX
+    XXXXXXX,  XXXXXXX,  _______,                                XXXXXXX,                                XXXXXXX,  XXXXXXX,            XXXXXXX,  XXXXXXX,  XXXXXXX
   ),
 };
 
