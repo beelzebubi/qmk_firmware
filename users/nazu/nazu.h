@@ -5,10 +5,10 @@
 
 enum layers {
     _QWERTY = 0,    // QWERTY layout for WIN or UNIX
-    _COLEMAK,       // Colemak layout
     _MACOS,         // QWERTY layout for MacOS
     _FN1,           //
     _FN2,           //
+    _COLEMAK,       // Colemak layout
 };
 
 enum cust_keys {
