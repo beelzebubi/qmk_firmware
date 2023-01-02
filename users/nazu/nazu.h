@@ -10,8 +10,8 @@
 /* Define layer names */
 enum userspace_layers {
     _QWERTY = 0,    // QWERTY layout for WIN or UNIX
-    _MACOS,         // QWERTY layout for MacOS
     _COLEMAK_DH,    // Colemak DHS layout
+    _MACOS,         // QWERTY layout for MacOS
     _FN1,           //
     _FN2,           //
     _MEDIA,         //

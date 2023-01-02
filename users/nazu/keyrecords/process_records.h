@@ -32,8 +32,8 @@ enum userspace_custom_keycodes {
 
 #define QWERTY KC_QWERTY
 #define DVORAK KC_DVORAK
-#define COLEMAK KC_COLEMAK
-#define COLEMAKDH KC_COLEMAK_DH
+// #define COLEMAK KC_COLEMAK
+#define CLMKDH KC_COLEMAK_DH
 #define MACOS KC_MAC
 #define EN_MAC KC_SWAP
 #define DS_MAC KC_NORM
