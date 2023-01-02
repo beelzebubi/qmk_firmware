@@ -68,8 +68,10 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #endif // TAP_DANCE_ENABLE
 
 #define LALT_F4 LM(_FN2, MOD_LALT)
-#define KC_R1   KC_RCTL
-#define KC_R2   KC_RALT
+#define KC_EMOW LGUI(KC_DOT)
+#define KC_EMOM LCTL(LGUI(KC_SPC))
+// #define KC_R1   KC_RCTL
+// #define KC_R2   KC_RALT
 #define KC_L1   KC_LALT
 // #define KC_L1   LALT_F4
 
@@ -149,58 +151,49 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_SWAP:
             keymap_config.raw = eeconfig_read_keymap();
             if (record->event.pressed) {
-                #undef KC_L1
-                #define KC_L1 KC_LALT
-                #undef KC_R1
-                #define KC_R1 KC_RALT
-                #undef KC_R2
-                #define KC_R2 KC_RGUI
-
                 keymap_config.swap_lalt_lgui = true;
-                // keymap_config.swap_rctl_rgui = true;
                 eeconfig_update_keymap(keymap_config.raw);
                 clear_keyboard(); // clear to prevent stuck keys
-
             }
             return false;
         case KC_NORM:
             keymap_config.raw = eeconfig_read_keymap();
             if (record->event.pressed) {
-                #undef KC_L1
-                #define KC_L1 KC_LALT
-                // #define KC_L1 LALT_F4
-                #undef KC_R1
-                #define KC_R1 KC_RCTL
-                #undef KC_R2
-                #define KC_R2 KC_RALT
-
                 keymap_config.swap_lalt_lgui = false;
-                // keymap_config.swap_rctl_rgui = false;
-                // keymap_config.swap_ralt_rgui = false;
                 eeconfig_update_keymap(keymap_config.raw);
                 clear_keyboard(); // clear to prevent stuck keys
             }
             return false;
-        // case KC_EMOM:
-        //     if (record->event.pressed) {
-        //         register_mods(mod_config(MOD_LCTL));
-        //         register_mods(mod_config(MOD_LALT));
-        //         register_code(KC_SPACE);
-        //     } else {
-        //         unregister_mods(mod_config(MOD_LCTL));
-        //         unregister_mods(mod_config(MOD_LALT));
-        //         unregister_code(KC_SPACE);
-        //     }
-        //     return false;
-        // case KC_EMOW:
-        //     if (record->event.pressed) {
-        //         register_mods(mod_config(MOD_LGUI));
-        //         register_code(KC_DOT);
-        //     } else {
-        //         unregister_mods(mod_config(MOD_LGUI));
-        //         unregister_code(KC_DOT);
-        //     }
-        //     return false;
+        case KC_R2:
+            if (record->event.pressed) {
+                if (keymap_config.swap_lalt_lgui) {
+                    register_mods(MOD_LGUI);
+                } else {
+                    register_mods(MOD_LALT);
+                }
+            } else {
+                if (keymap_config.swap_lalt_lgui) {
+                    unregister_mods(MOD_LGUI);
+                } else {
+                    unregister_mods(MOD_LALT);
+                }
+            }
+            return true;
+        case KC_R1:
+            if (record->event.pressed) {
+                if (keymap_config.swap_lalt_lgui) {
+                    register_mods(MOD_LALT);
+                } else {
+                    register_mods(MOD_LCTL);
+                }
+            } else {
+                if (keymap_config.swap_lalt_lgui) {
+                    unregister_mods(MOD_LALT);
+                } else {
+                    unregister_mods(MOD_LCTL);
+                }
+            }
+            return true;
     }
     return true;
 }
