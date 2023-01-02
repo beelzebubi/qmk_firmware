@@ -22,18 +22,17 @@
 /* Define layer names */
 enum userspace_layers {
     _QWERTY = 0,    // QWERTY layout for WIN or UNIX
+    _COLEMAK,       // Colemak lazout
     _COLEMAK_DH,    // Colemak DHS layout
     _MACOS,         // QWERTY layout for MacOS
     _FN1,           //
     _FN2,           //
-    _MEDIA,         //
-    _LOWER,         //
-    _RAISE,         //
-    _ADJUST,        //
 };
 enum userspace_custom_keycodes {
-    KC_QWERTY = SAFE_RANGE,   // change to QWERTY layer
-    KC_COLEMAK_DH,                // change to COLEMAK layer
+    KC_QWERTY = SAFE_RANGE, // change to QWERTY layer
+    KC_COLEMAK,             // change to COLEMAK layer
+    KC_COLEMAK_DH,          // change to COLEMAK DH layer
+    KC_DVORAK,              // change to Dvorak layer
     KC_MAC,                 // change to MACOS layer
     KC_EMOM,                // shortcut for emoji picker in MACOS
     KC_EMOW,                // shortcut for emoji picker in WINDOWS
@@ -41,6 +40,9 @@ enum userspace_custom_keycodes {
     KC_CAD,
     KC_SWAP,                // SWAP to MACOS mods
     KC_NORM,                // UNSWAP MACOS mods
+    KC_R1,
+    KC_R2,
+    KC_L1,
 };
 
 
@@ -66,13 +68,16 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 #endif // TAP_DANCE_ENABLE
 
 #define LALT_F4 LM(_FN2, MOD_LALT)
+#define KC_R1   KC_RCTL
+#define KC_R2   KC_RALT
+#define KC_L1   KC_LALT
+// #define KC_L1   LALT_F4
+
 #define QWERTY KC_QWERTY
 #define DVORAK KC_DVORAK
-// #define COLEMAK KC_COLEMAK
+#define COLEMK KC_COLEMAK
 #define CLMKDH KC_COLEMAK_DH
 #define MACOS KC_MAC
-#define EN_MAC KC_SWAP
-#define DS_MAC KC_NORM
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_wk(
@@ -80,14 +85,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
             KC_PGUP,  KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS,
            KC_PGDN,   KC_CAPS, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_ENT,
                       TD_CAPS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, KC_UP,
-                      KC_LCTL, KC_LGUI, LALT_F4,     KC_SPC,       MO(_FN1),                     KC_SPC,           KC_RALT, KC_RCTL,          KC_LEFT, KC_DOWN, KC_RGHT
+                      KC_LCTL, KC_LGUI, KC_L1,       KC_SPC,       MO(_FN1),                     KC_SPC,           KC_R2,   KC_R1,            KC_LEFT, KC_DOWN, KC_RGHT
+    ),
+    [_COLEMAK] = LAYOUT_wk(
+             KC_ESC,  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,     KC_6,      KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,           KC_BSPC, KC_DEL,
+            KC_PGUP,  KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_G,                KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_LBRC, KC_RBRC, KC_BSLS,
+           KC_PGDN,   KC_CAPS, KC_A,    KC_R,    KC_S,    KC_T,    KC_D,                KC_H,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,                   KC_ENT,
+                      TD_CAPS, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                KC_B,    KC_K,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, KC_UP,
+                      KC_LCTL, KC_LGUI, KC_L1,       KC_SPC,       MO(_FN1),                     KC_SPC,           KC_R2,   KC_R1,            KC_LEFT, KC_DOWN, KC_RGHT
     ),
     [_COLEMAK_DH] = LAYOUT_wk(
              KC_ESC,  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,     KC_6,      KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,           KC_BSPC, KC_DEL,
             KC_PGUP,  KC_TAB,  KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                KC_J,    KC_L,    KC_U,    KC_Y,    KC_SCLN, KC_LBRC, KC_RBRC, KC_BSLS,
            KC_PGDN,   KC_CAPS, KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                KC_M,    KC_N,    KC_E,    KC_I,    KC_O,    KC_QUOT,                   KC_ENT,
                       TD_CAPS, KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                KC_V,    KC_K,    KC_H,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, KC_UP,
-                      KC_LCTL, KC_LGUI, LALT_F4,     KC_SPC,       MO(_FN1),                     KC_SPC,           KC_RALT, KC_RCTL,          KC_LEFT, KC_DOWN, KC_RGHT
+                      KC_LCTL, KC_LGUI, KC_L1,       KC_SPC,       MO(_FN1),                     KC_SPC,           KC_R2,   KC_R1,            KC_LEFT, KC_DOWN, KC_RGHT
     ),
     [_MACOS] = LAYOUT_wk(
              KC_ESC,  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,     KC_6,      KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,           KC_BSPC, KC_DEL,
@@ -98,10 +110,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_FN1] = LAYOUT_wk(
              QK_BOOT, _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,      KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,           XXXXXXX, XXXXXXX,
-            KC_HOME,  _______, QWERTY,  CLMKDH,  MACOS,   XXXXXXX, XXXXXXX,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-           KC_END,    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
+            KC_SWAP,  _______, QWERTY,  CLMKDH,  MACOS,   XXXXXXX, XXXXXXX,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+           KC_NORM,   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
                       _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,             XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, KC_VOLU,
-                      _______, _______, _______,     KC_MPLY,      XXXXXXX,                      KC_MUTE,          _______, _______,          KC_LEFT, KC_DOWN, KC_RGHT
+                      _______, _______, _______,     KC_MPLY,      XXXXXXX,                      KC_MUTE,          _______, _______,          KC_MPRV, KC_VOLD, KC_MNXT
     ),
     [_FN2] = LAYOUT_wk(
              _______, _______, _______, _______, _______, KC_F4,   _______, _______,    _______, _______, _______, _______, _______, _______,          _______, _______,
@@ -119,11 +131,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 set_single_persistent_default_layer(_QWERTY);
             }
             return false;
-        // case KC_COLEMAK:
-        //     if (record->event.pressed) {
-        //         set_single_persistent_default_layer(_COLEMAK);
-        //     }
-        //     return false;
+        case KC_COLEMAK:
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(_COLEMAK);
+            }
+            return false;
         case KC_COLEMAK_DH:
             if (record->event.pressed) {
                 set_single_persistent_default_layer(_COLEMAK_DH);
@@ -134,28 +146,41 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 set_single_persistent_default_layer(_MACOS);
             }
             return false;
-        // case KC_SWAP:
-        //     if (record->event.pressed) {
-        //         // register_code(RCG_SWP);
-        //         // register_code(RAG_SWP);
-        //         register_code(LAG_SWP);
-        //     } else {
-        //         // unregister_code(RCG_SWP);
-        //         // unregister_code(RAG_SWP);
-        //         unregister_code(LAG_SWP);
-        //     }
-        //     return false;
-        // case KC_NORM:
-        //     if (record->event.pressed) {
-        //         // register_code(RCG_NRM);
-        //         // register_code(RAG_NRM);
-        //         register_code(LAG_NRM);
-        //     } else {
-        //         // unregister_code(RCG_NRM);
-        //         // unregister_code(RAG_NRM);
-        //         unregister_code(LAG_NRM);
-        //     }
-        //     return false;
+        case KC_SWAP:
+            keymap_config.raw = eeconfig_read_keymap();
+            if (record->event.pressed) {
+                #undef KC_L1
+                #define KC_L1 KC_LALT
+                #undef KC_R1
+                #define KC_R1 KC_RALT
+                #undef KC_R2
+                #define KC_R2 KC_RGUI
+
+                keymap_config.swap_lalt_lgui = true;
+                // keymap_config.swap_rctl_rgui = true;
+                eeconfig_update_keymap(keymap_config.raw);
+                clear_keyboard(); // clear to prevent stuck keys
+
+            }
+            return false;
+        case KC_NORM:
+            keymap_config.raw = eeconfig_read_keymap();
+            if (record->event.pressed) {
+                #undef KC_L1
+                #define KC_L1 KC_LALT
+                // #define KC_L1 LALT_F4
+                #undef KC_R1
+                #define KC_R1 KC_RCTL
+                #undef KC_R2
+                #define KC_R2 KC_RALT
+
+                keymap_config.swap_lalt_lgui = false;
+                // keymap_config.swap_rctl_rgui = false;
+                // keymap_config.swap_ralt_rgui = false;
+                eeconfig_update_keymap(keymap_config.raw);
+                clear_keyboard(); // clear to prevent stuck keys
+            }
+            return false;
         // case KC_EMOM:
         //     if (record->event.pressed) {
         //         register_mods(mod_config(MOD_LCTL));
