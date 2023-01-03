@@ -1,11 +1,32 @@
 #include "nazu.h"
 // #include "version.h"
 
-__attribute__((weak)) bool process_record_keymap(uint16_t keycode, keyrecord_t *record) { return true; }
+/**
+ * @brief Keycode handler for keymaps
+ *
+ * This handles the keycodes at the keymap level, useful for keyboard specific customization
+ */
+__attribute__((weak)) bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
+    return true;
+}
+__attribute__((weak)) bool process_record_secrets(uint16_t keycode, keyrecord_t *record) {
+    return true;
+}
 
-__attribute__((weak)) bool process_record_secrets(uint16_t keycode, keyrecord_t *record) { return true; }
-
+uint8_t mod_state;
+/**
+ * @brief Main user keycode handler
+ *
+ * This handles all of the keycodes for the user, including calling feature handlers.
+ *
+ * @param keycode Keycode from matrix
+ * @param record keyrecord_t data structure
+ * @return true Continue processing keycode and send to host
+ * @return false Stop process keycode and do not send to host
+ */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    // Store the current modifier state in the variable for later reference
+    mod_state = get_mods();
     switch (keycode) {
         case KC_QWERTY:
             if (record->event.pressed) {
@@ -22,17 +43,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 set_single_persistent_default_layer(_COLEMAK_DH);
             }
             return false;
-        case KC_MAC:
-            if (record->event.pressed) {
-                set_single_persistent_default_layer(_MACOS);
-            }
-            return false;
         case KC_SWAP:
             keymap_config.raw = eeconfig_read_keymap();
             if (record->event.pressed) {
                 keymap_config.swap_lalt_lgui = true;
-                keymap_config.swap_rctl_rgui = true;
-                // keymap_config.swap_ralt_rgui = true;
                 eeconfig_update_keymap(keymap_config.raw);
                 clear_keyboard(); // clear to prevent stuck keys
             }
@@ -41,38 +55,88 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             keymap_config.raw = eeconfig_read_keymap();
             if (record->event.pressed) {
                 keymap_config.swap_lalt_lgui = false;
-                keymap_config.swap_rctl_rgui = false;
-                // keymap_config.swap_ralt_rgui = false;
                 eeconfig_update_keymap(keymap_config.raw);
                 clear_keyboard(); // clear to prevent stuck keys
             }
             return false;
-        // case KC_EMOM:
-        //     if (record->event.pressed) {
-        //         register_mods(mod_config(MOD_LCTL));
-        //         register_mods(mod_config(MOD_LALT));
-        //         register_code(KC_SPACE);
-        //     } else {
-        //         unregister_mods(mod_config(MOD_LCTL));
-        //         unregister_mods(mod_config(MOD_LALT));
-        //         unregister_code(KC_SPACE);
-        //     }
-        //     return false;
-        // case KC_EMOW:
-        //     if (record->event.pressed) {
-        //         register_mods(mod_config(MOD_LGUI));
-        //         register_code(KC_DOT);
-        //     } else {
-        //         unregister_mods(mod_config(MOD_LGUI));
-        //         unregister_code(KC_DOT);
-        //     }
-        //     return false;
+        case KC_R2:
+            if (record->event.pressed) {
+                if (keymap_config.swap_lalt_lgui) {
+                    register_mods(MOD_BIT(KC_RGUI));
+                } else {
+                    register_mods(MOD_BIT(KC_RALT));
+                }
+            } else {
+                if (keymap_config.swap_lalt_lgui) {
+                    unregister_mods(MOD_BIT(KC_RGUI));
+                } else {
+                    unregister_mods(MOD_BIT(KC_RALT));
+                }
+            }
+            return true;
+        case KC_R1:
+            if (record->event.pressed) {
+                if (keymap_config.swap_lalt_lgui) {
+                    register_mods(MOD_BIT(KC_RALT));
+                } else {
+                    register_mods(MOD_BIT(KC_RCTL));
+                }
+            } else {
+                if (keymap_config.swap_lalt_lgui) {
+                    unregister_mods(MOD_BIT(KC_RALT));
+                } else {
+                    unregister_mods(MOD_BIT(KC_RCTL));
+                }
+            }
+            return true;
+        case KC_4: // Implementation of Alt F4
+            // Only detect in Windows-typical config
+            if (!keymap_config.swap_lalt_lgui) {
+                // Detect the activation of only Left Alt
+                if ((mod_state & MOD_BIT(KC_LALT)) == MOD_BIT(KC_LALT)) {
+                    if (record->event.pressed) {
+                        // No need to register KC_LALT because it's already active.
+                        // The Alt modifier will apply on this KC_F4.
+                        register_code(KC_F4);
+                    } else {
+                        unregister_code(KC_F4);
+                    }
+                    // Do not let QMK process the keycode further
+                    return false;
+                }
+            }
+            // Else, let QMK process the KC_4 keycode as usual
+            return true;
+        case KC_A ... KC_Z: // Hack for EurKEY on Windows, where alternate characters do not work with LALT
+                // Detect the activation of only Left Alt
+                if ((mod_state & MOD_BIT(KC_LALT)) == MOD_BIT(KC_LALT)) {
+                    static bool raltkey_registered;
+                    if (record->event.pressed) {
+                        // First, canceling MOD_LALT
+                        del_mods(MOD_BIT(KC_LALT));
+                        // Then sending actual combo
+                        register_mods(MOD_BIT(KC_RALT));
+                        register_code(keycode);
+                        // Update the boolean variable to reflect the status of MOD_RALT
+                        raltkey_registered = true;
+                        // Reapplying modifier state so that the held LALT key still work even after having tapped the key.
+                        set_mods(mod_state);
+                        return false;
+                    } else {
+                        if (raltkey_registered) {
+                            raltkey_registered = false;
+                            unregister_mods(MOD_BIT(KC_RALT));
+                            unregister_code(keycode);
+                            return false;
+                        }
+                    }
+                    // Do not let QMK process the keycode further
+                    return true;
+                }
+            // Else, let QMK process the keycode as usual
+            return true;
     }
     return true;
-    // return process_record_keymap(keycode, record) && process_record_secrets(keycode, record);
 }
 
-// __attribute__((weak)) void post_process_record_keymap(uint16_t keycode, keyrecord_t *record) {}
-// void                       post_process_record_user(uint16_t keycode, keyrecord_t *record) {
-//     post_process_record_keymap(keycode, record);
-// }
+

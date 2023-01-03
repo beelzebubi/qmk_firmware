@@ -6,13 +6,13 @@ enum userspace_custom_keycodes {
     KC_COLEMAK,             // change to COLEMAK layer
     KC_COLEMAK_DH,          // change to COLEMAK DH layer
     KC_DVORAK,              // change to Dvorak layer
-    KC_MAC,                 // change to MACOS layer
     KC_EMOM,                // shortcut for emoji picker in MACOS
     KC_EMOW,                // shortcut for emoji picker in WINDOWS
-    LALT_F4,                // shortcut for LALT+F4
     KC_CAD,
     KC_SWAP,                // SWAP to MACOS mods
     KC_NORM,                // UNSWAP MACOS mods
+    KC_R1,                  // wildcard to swap modifier in WIN/UNIX/MACOS
+    KC_R2,                  // wildcard to swap modifier in WIN/UNIX/MACOS
 };
 
 bool process_record_secrets(uint16_t keycode, keyrecord_t *record);
@@ -39,9 +39,6 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record);
 #define DVORAK KC_DVORAK
 #define COLEMAK KC_COLEMAK
 #define CLMKDH KC_COLEMAK_DH
-#define MACOS KC_MAC
-#define EN_MAC KC_SWAP
-#define DS_MAC KC_NORM
 
 /* OSM keycodes, to keep things clean and easy to change */
 #define KC_MLSF OSM(MOD_LSFT)
