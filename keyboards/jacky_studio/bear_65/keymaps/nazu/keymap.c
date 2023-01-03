@@ -16,8 +16,8 @@
 
 #include QMK_KEYBOARD_H
 // #include "nazu.h"
-#include "quantum.h"
-#include "version.h"
+// #include "quantum.h"
+// #include "version.h"
 
 /* Define layer names */
 enum userspace_layers {
@@ -34,7 +34,6 @@ enum userspace_custom_keycodes {
     KC_DVORAK,              // change to Dvorak layer
     KC_EMOM,                // shortcut for emoji picker in MACOS
     KC_EMOW,                // shortcut for emoji picker in WINDOWS
-    LALT_F4,                // shortcut for LALT+F4
     KC_CAD,
     KC_SWAP,                // SWAP to MACOS mods
     KC_NORM,                // UNSWAP MACOS mods
@@ -111,7 +110,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 };
 
+uint8_t mod_state;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    // Store the current modifier state in the variable for later reference
+    mod_state = get_mods();
     switch (keycode) {
         case KC_QWERTY:
             if (record->event.pressed) {
@@ -174,11 +176,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return true;
-        case KC_4:
+        case KC_4: // Implementation of Alt F4
             // Only detect in Windows-typical config
             if (!keymap_config.swap_lalt_lgui) {
                 // Detect the activation of only Left Alt
-                if ((get_mods() & MOD_BIT(KC_LALT)) == MOD_BIT(KC_LALT)) {
+                if ((mod_state & MOD_BIT(KC_LALT)) == MOD_BIT(KC_LALT)) {
                     if (record->event.pressed) {
                         // No need to register KC_LALT because it's already active.
                         // The Alt modifier will apply on this KC_F4.
@@ -191,6 +193,34 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             // Else, let QMK process the KC_4 keycode as usual
+            return true;
+        case KC_A ... KC_Z: // Hack for EurKEY on Windows, where alternate characters do not work with LALT
+                // Detect the activation of only Left Alt
+                if ((mod_state & MOD_BIT(KC_LALT)) == MOD_BIT(KC_LALT)) {
+                    static bool raltkey_registered;
+                    if (record->event.pressed) {
+                        // First, canceling MOD_LALT
+                        del_mods(MOD_BIT(KC_LALT));
+                        // Then sending actual combo
+                        register_mods(MOD_BIT(KC_RALT));
+                        register_code(keycode);
+                        // Update the boolean variable to reflect the status of MOD_RALT
+                        raltkey_registered = true;
+                        // Reapplying modifier state so that the held LALT key still work even after having tapped the key.
+                        set_mods(mod_state);
+                        return false;
+                    } else {
+                        if (raltkey_registered) {
+                            raltkey_registered = false;
+                            unregister_mods(MOD_BIT(KC_RALT));
+                            unregister_code(keycode);
+                            return false;
+                        }
+                    }
+                    // Do not let QMK process the keycode further
+                    return true;
+                }
+            // Else, let QMK process the keycode as usual
             return true;
     }
     return true;
