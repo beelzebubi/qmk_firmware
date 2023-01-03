@@ -1,7 +1,7 @@
 #pragma once
 #include QMK_KEYBOARD_H
 
-// #include "keyrecords/wrappers.h"
+#include "keyrecords/wrappers.h"
 // #include "keyrecords/process_records.h"
 // #include "version.h"
 // #include "quantum.h"
@@ -12,7 +12,6 @@ enum userspace_layers {
     _COLEMAK,       // Colemak lazout
     _COLEMAK_DH,    // Colemak DHS layout
     _FN1,           //
-    _FN2,           //
     _MEDIA,         //
     _LOWER,         //
     _RAISE,         //
