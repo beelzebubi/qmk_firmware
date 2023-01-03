@@ -78,7 +78,7 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record);
 #define LT_BPCF LT(_FN1_60, KC_BSPC)
 #define CA_COPY LCTL(KC_C)
 #define CA_PSTE LCTL(KC_V)
-#define KC_EMOM LALT(LCTL(KC_SPACE))
+#define KC_EMOM LALT(LGUI(KC_SPACE))
 #define KC_EMOW LGUI(KC_DOT)
 #define LALT_F4 LM(_FN2, MOD_LALT)
 
@@ -250,6 +250,69 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     // Do not let QMK process the keycode further
                     return true;
                 }
+            // Else, let QMK process the keycode as usual
+            return true;
+        case KC_DOT:
+            if (keymap_config.swap_lalt_lgui) {
+                if ((mod_state & MOD_BIT(KC_LGUI)) == MOD_BIT(KC_LGUI)) {
+                    static bool lguikey_registered;
+                    if (record->event.pressed) {
+                        // First, canceling MOD_LALT
+                        del_mods(MOD_BIT(KC_LGUI));
+                        // Then sending actual combo
+                        register_mods(MOD_BIT(KC_LCTL));
+                        register_mods(MOD_BIT(KC_LGUI));
+                        register_code(KC_SPACE);
+                        // Update the boolean variable to reflect the status of MOD_RALT
+                        lguikey_registered = true;
+                        // Reapplying modifier state so that the held LALT key still work even after having tapped the key.
+                        set_mods(mod_state);
+                        return false;
+                    } else {
+                        if (lguikey_registered) {
+                            lguikey_registered = false;
+                            unregister_mods(MOD_BIT(KC_LCTL));
+                            unregister_mods(MOD_BIT(KC_LGUI));
+                            unregister_code(KC_SPACE);
+                            return false;
+                        }
+                    }
+                    // Do not let QMK process the keycode further
+                    return true;
+                }
+            }
+            // Else, let QMK process the keycode as usual
+            return true;
+        case KC_SPACE:
+            if (!keymap_config.swap_lalt_lgui) {
+                if ((mod_state & MOD_BIT(KC_LGUI)) == MOD_BIT(KC_LGUI)) {
+                    if ((mod_state & MOD_BIT(KC_LCTL)) == MOD_BIT(KC_LCTL)) {
+                        static bool lguikey_registered;
+                        if (record->event.pressed) {
+                            // First, canceling MOD_LALT
+                            del_mods(MOD_BIT(KC_LGUI));
+                            del_mods(MOD_BIT(KC_LCTL));
+                            // Then sending actual combo
+                            register_mods(MOD_BIT(KC_LGUI));
+                            register_code(KC_DOT);
+                            // Update the boolean variable to reflect the status of MOD_RALT
+                            lguikey_registered = true;
+                            // Reapplying modifier state so that the held LALT key still work even after having tapped the key.
+                            set_mods(mod_state);
+                            return false;
+                        } else {
+                            if (lguikey_registered) {
+                                lguikey_registered = false;
+                                unregister_mods(MOD_BIT(KC_LGUI));
+                                unregister_code(KC_DOT);
+                                return false;
+                            }
+                        }
+                        // Do not let QMK process the keycode further
+                        return true;
+                    }
+                }
+            }
             // Else, let QMK process the keycode as usual
             return true;
     }
