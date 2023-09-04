@@ -88,13 +88,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (keymap_config.swap_lalt_lgui) {
                     register_mods(MOD_BIT(KC_RALT));
                 } else {
-                    register_mods(MOD_BIT(KC_RCTL));
+                    register_mods(MOD_BIT(KC_RALT));
                 }
             } else {
                 if (keymap_config.swap_lalt_lgui) {
                     unregister_mods(MOD_BIT(KC_RALT));
                 } else {
-                    unregister_mods(MOD_BIT(KC_RCTL));
+                    unregister_mods(MOD_BIT(KC_RALT));
                 }
             }
             return true;
