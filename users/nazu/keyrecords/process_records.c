@@ -118,6 +118,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return true;
         case KC_A ... KC_Z: // Hack for EurKEY on Windows, where alternate characters do not work with LALT
                 // Detect the activation of only Left Alt
+            if (!keymap_config.swap_lalt_lgui) {
                 if ((mod_state & MOD_BIT(KC_LALT)) == MOD_BIT(KC_LALT)) {
                     static bool raltkey_registered;
                     if (record->event.pressed) {
@@ -142,6 +143,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                     // Do not let QMK process the keycode further
                     return true;
                 }
+            }
             // Else, let QMK process the keycode as usual
             return true;
         case KC_DOT:
