@@ -30,13 +30,23 @@ typedef struct {
     td_state_t state;
 } td_tap_t;
 
-td_state_t dance_space_dot(qk_tap_dance_state_t *state);
+td_state_t dance_space_dot(tap_dance_state_t *state);
 
 // For the x tap dance. Put it here so it can be used in any keymap
-void x_finished(qk_tap_dance_state_t *state, void *user_data);
-void x_reset(qk_tap_dance_state_t *state, void *user_data);
+void x_finished(tap_dance_state_t *state, void *user_data);
+void x_reset(tap_dance_state_t *state, void *user_data);
 
 // `finished` and `reset` functions for each tapdance keycode
-void spc_dot_finished (qk_tap_dance_state_t *state, void *user_data);
-void spc_dot_reset (qk_tap_dance_state_t *state, void *user_data);
+void spc_dot_finished (tap_dance_state_t *state, void *user_data);
+void spc_dot_reset (tap_dance_state_t *state, void *user_data);
+
+// td_state_t dance_space_dot(qk_tap_dance_state_t *state);
+
+// // For the x tap dance. Put it here so it can be used in any keymap
+// void x_finished(qk_tap_dance_state_t *state, void *user_data);
+// void x_reset(qk_tap_dance_state_t *state, void *user_data);
+
+// // `finished` and `reset` functions for each tapdance keycode
+// void spc_dot_finished (qk_tap_dance_state_t *state, void *user_data);
+// void spc_dot_reset (qk_tap_dance_state_t *state, void *user_data);
 

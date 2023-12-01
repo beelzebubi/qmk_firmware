@@ -32,8 +32,8 @@
  *
  */
 
-// td_state_t dance_space_dot(tap_dance_state_t *state) {
-td_state_t dance_space_dot(qk_tap_dance_state_t *state) {
+td_state_t dance_space_dot(tap_dance_state_t *state) {
+// td_state_t dance_space_dot(qk_tap_dance_state_t *state) {
     if (state->count == 1) {
         if (state->interrupted || !state->pressed) return TD_SINGLE_TAP;
         // Key has not been interrupted, but the key is still held. Means you want to send a 'HOLD'.
@@ -62,7 +62,8 @@ static td_tap_t xtap_state = {
     .state = TD_NONE
 };
 
-void spc_dot_finished(qk_tap_dance_state_t *state, void *user_data) {
+void spc_dot_finished(tap_dance_state_t *state, void *user_data) {
+// void spc_dot_finished(qk_tap_dance_state_t *state, void *user_data) {
     xtap_state.state = dance_space_dot(state);
     switch (xtap_state.state) {
         case TD_SINGLE_TAP: register_code(KC_SPC); break;
@@ -77,7 +78,8 @@ void spc_dot_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-void spc_dot_reset(qk_tap_dance_state_t *state, void *user_data) {
+void spc_dot_reset(tap_dance_state_t *state, void *user_data) {
+// void spc_dot_reset(qk_tap_dance_state_t *state, void *user_data) {
     switch (xtap_state.state) {
         case TD_SINGLE_TAP: unregister_code(KC_SPC); break;
         case TD_SINGLE_HOLD: unregister_code(KC_SPC); break;
@@ -89,7 +91,8 @@ void spc_dot_reset(qk_tap_dance_state_t *state, void *user_data) {
     xtap_state.state = TD_NONE;
 }
 
-qk_tap_dance_action_t tap_dance_actions[] = {
+tap_dance_action_t tap_dance_actions[] = {
+// qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_LSFT_CAPS] = ACTION_TAP_DANCE_DOUBLE(KC_LSFT, KC_CAPS),
     // [TD_SPACE_DOT] = ACTION_TAP_DANCE_DOUBLE(KC_SPACE, KC_DOT),
     // [TD_SPACE_DOT] = ACTION_TAP_DANCE_FN(dance_space_dot),
