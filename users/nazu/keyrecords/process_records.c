@@ -116,36 +116,36 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             // Else, let QMK process the KC_4 keycode as usual
             return true;
-        case KC_A ... KC_Z: // Hack for EurKEY on Windows, where alternate characters do not work with LALT
-                // Detect the activation of only Left Alt
-            if (!keymap_config.swap_lalt_lgui) {
-                if ((mod_state & MOD_BIT(KC_LALT)) == MOD_BIT(KC_LALT)) {
-                    static bool raltkey_registered;
-                    if (record->event.pressed) {
-                        // First, canceling MOD_LALT
-                        del_mods(MOD_BIT(KC_LALT));
-                        // Then sending actual combo
-                        register_mods(MOD_BIT(KC_RALT));
-                        register_code(keycode);
-                        // Update the boolean variable to reflect the status of MOD_RALT
-                        raltkey_registered = true;
-                        // Reapplying modifier state so that the held LALT key still work even after having tapped the key.
-                        set_mods(mod_state);
-                        return false;
-                    } else {
-                        if (raltkey_registered) {
-                            raltkey_registered = false;
-                            unregister_mods(MOD_BIT(KC_RALT));
-                            unregister_code(keycode);
-                            return false;
-                        }
-                    }
-                    // Do not let QMK process the keycode further
-                    return true;
-                }
-            }
-            // Else, let QMK process the keycode as usual
-            return true;
+        // case KC_A ... KC_Z: // Hack for EurKEY on Windows, where alternate characters do not work with LALT
+        //         // Detect the activation of only Left Alt
+        //     if (!keymap_config.swap_lalt_lgui) {
+        //         if ((mod_state & MOD_BIT(KC_LALT)) == MOD_BIT(KC_LALT)) {
+        //             static bool raltkey_registered;
+        //             if (record->event.pressed) {
+        //                 // First, canceling MOD_LALT
+        //                 del_mods(MOD_BIT(KC_LALT));
+        //                 // Then sending actual combo
+        //                 register_mods(MOD_BIT(KC_RALT));
+        //                 register_code(keycode);
+        //                 // Update the boolean variable to reflect the status of MOD_RALT
+        //                 raltkey_registered = true;
+        //                 // Reapplying modifier state so that the held LALT key still work even after having tapped the key.
+        //                 set_mods(mod_state);
+        //                 return false;
+        //             } else {
+        //                 if (raltkey_registered) {
+        //                     raltkey_registered = false;
+        //                     unregister_mods(MOD_BIT(KC_RALT));
+        //                     unregister_code(keycode);
+        //                     return false;
+        //                 }
+        //             }
+        //             // Do not let QMK process the keycode further
+        //             return true;
+        //         }
+        //     }
+        //     // Else, let QMK process the keycode as usual
+        //     return true;
         case KC_DOT:
             if (keymap_config.swap_lalt_lgui) {
                 if ((mod_state & MOD_BIT(KC_LALT)) == MOD_BIT(KC_LALT)) {
