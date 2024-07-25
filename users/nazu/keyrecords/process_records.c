@@ -146,6 +146,60 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         //     }
         //     // Else, let QMK process the keycode as usual
         //     return true;
+        case KC_A: // workaround for Windows US International layout
+            // Only detect in Windows-typical config
+            if (!keymap_config.swap_lalt_lgui) {
+                // Detect the activation of only Left Alt
+                if ((mod_state & MOD_BIT(KC_RALT)) == MOD_BIT(KC_RALT)) {
+                    if (record->event.pressed) {
+                        // No need to register KC_RALT because it's already active.
+                        // The Alt modifier will apply on this KC_Q.
+                        register_code(KC_Q);
+                    } else {
+                        unregister_code(KC_Q);
+                    }
+                    // Do not let QMK process the keycode further
+                    return false;
+                }
+            }
+            // Else, let QMK process the KC_4 keycode as usual
+            return true;
+        case KC_U: // workaround for Windows US International layout
+            // Only detect in Windows-typical config
+            if (!keymap_config.swap_lalt_lgui) {
+                // Detect the activation of only Left Alt
+                if ((mod_state & MOD_BIT(KC_RALT)) == MOD_BIT(KC_RALT)) {
+                    if (record->event.pressed) {
+                        // No need to register KC_RALT because it's already active.
+                        // The Alt modifier will apply on this KC_Y.
+                        register_code(KC_Y);
+                    } else {
+                        unregister_code(KC_Y);
+                    }
+                    // Do not let QMK process the keycode further
+                    return false;
+                }
+            }
+            // Else, let QMK process the KC_4 keycode as usual
+            return true;
+        case KC_O: // workaround for Windows US International layout
+            // Only detect in Windows-typical config
+            if (!keymap_config.swap_lalt_lgui) {
+                // Detect the activation of only Left Alt
+                if ((mod_state & MOD_BIT(KC_RALT)) == MOD_BIT(KC_RALT)) {
+                    if (record->event.pressed) {
+                        // No need to register KC_RALT because it's already active.
+                        // The Alt modifier will apply on this KC_P.
+                        register_code(KC_P);
+                    } else {
+                        unregister_code(KC_P);
+                    }
+                    // Do not let QMK process the keycode further
+                    return false;
+                }
+            }
+            // Else, let QMK process the KC_4 keycode as usual
+            return true;
         case KC_DOT:
             if (keymap_config.swap_lalt_lgui) {
                 if ((mod_state & MOD_BIT(KC_LALT)) == MOD_BIT(KC_LALT)) {
