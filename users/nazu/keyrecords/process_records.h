@@ -32,6 +32,7 @@ enum userspace_custom_keycodes {
 #define CA_COPY LCTL(KC_C)
 #define CA_PSTE LCTL(KC_V)
 #define LALT_F4 LM(_FN2, MOD_LALT)
+#define HYPR_BS HYPR_T(KC_BSPC)
 
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
